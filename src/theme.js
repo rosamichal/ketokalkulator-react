@@ -6,8 +6,15 @@ const colorNames = {
 }
 
 export const theme = {
+    breakpoints: {
+        mobile: 550,
+    },
     body: {
         background: colorNames.WhiteSmoke,
         color: colorNames.LasMaras,
+    },
+    header: {
+        darkGreen: colorNames.Crocodile,
+        lightGreen: colorNames.StickySap,
     }
 } 
