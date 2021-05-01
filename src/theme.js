@@ -35,6 +35,10 @@ export const theme = {
         recipeMacroSummary: {
             background: colorNames.StickySap,
             color: colorNames.White,
+        },
+        recipeForm:{
+            background: colorNames.White,
+            color: colorNames.LasMaras,
         }
     }
 } 

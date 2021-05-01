@@ -22,3 +22,9 @@ export const EnergyRatioWrapper = styled.div`
     grid-column: 1/4;
     padding: 0 10px 10px;
 `;
+
+export const RecipeForm = styled.div`
+    background: ${({ theme }) => theme.currentRecipe.recipeForm.background};
+    color: ${({ theme }) => theme.currentRecipe.recipeForm.color};
+    padding: 10px;
+`;
