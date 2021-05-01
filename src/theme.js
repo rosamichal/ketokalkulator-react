@@ -22,5 +22,11 @@ export const theme = {
     footer: {
         background: colorNames.StickySap,
         color: colorNames.White,
+    },
+    currentRecipe: {
+        recipeMacroSummary: {
+            background: colorNames.StickySap,
+            color: colorNames.White,
+        }
     }
 } 
