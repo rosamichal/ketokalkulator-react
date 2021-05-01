@@ -3,9 +3,9 @@ import { IngredientMacroSummaryWrapper } from './styles'
 const IngredientMacroSummary = ({ ingredient }) => {
     return (
         <IngredientMacroSummaryWrapper>
-            <span class="ingredients-list__macro--protein">B: {ingredient.Protein} g</span>
-            <span class="ingredients-list__macro--fat">T: {ingredient.Fat} g</span>
-            <span class="ingredients-list__macro--carbohydrates">W: {ingredient.Carbohydrates} g</span>
+            <span>B: {ingredient.Protein} g</span>
+            <span>T: {ingredient.Fat} g</span>
+            <span>W: {ingredient.Carbohydrates} g</span>
         </IngredientMacroSummaryWrapper>
     )
 }

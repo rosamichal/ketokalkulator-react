@@ -1,5 +1,6 @@
 import { RecipeMacroSummary, Macro, MacroHeader, EnergyRatioWrapper, RecipeForm } from './styles'
 import { WideInput, TextArea } from '../common/Input'
+import { Button } from '../common/Button'
 import IngredientsList from './IngredientsList'
 
 const CurrentRecipe = () => {
@@ -34,14 +35,14 @@ const CurrentRecipe = () => {
                 <p className="recipe__name-error js--name-error"></p>
                 <h3 className="recipe__ingredients-list-empty-label js--ingredients-list-empty-label">Kliknij "Dodaj składnik", aby rozpocząć</h3>
                 <IngredientsList />
-                <button className="js--btn-add-ingredient">Dodaj składnik</button>
+                <Button primary>Dodaj składnik</Button>
                 <span className="recipe__ingredients-error js--ingredients-error"></span>
                 <TextArea className="input input--recipe-note js--recipe-note" rows="5"
                     placeholder="Miejsce na notatki (opcjonalne)"></TextArea>
-                <div className="buttons">
-                    <button className="btn-new-recipe js--btn-new-recipe">Wyczyść</button>
-                    <button className="btn-install hidden js--btn-install">Zainstaluj aplikację</button>
-                    <button className="btn-save js--btn-save-recipe">Zapisz</button>
+                <div>
+                    <Button danger>Wyczyść</Button>
+                    <Button >Zainstaluj aplikację</Button>
+                    <Button primary>Zapisz</Button>
                 </div>
             </RecipeForm>
         </>

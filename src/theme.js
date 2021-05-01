@@ -3,7 +3,8 @@ const colorNames = {
     WhiteSmoke: "#F5F5F5",
     Crocodile: "#006E00",
     StickySap: "#5EB000",
-    White: "#FFFFFF"
+    White: "#FFFFFF",
+    TomatoFrog: "#FF4444"
 }
 
 export const theme = {
@@ -11,11 +12,28 @@ export const theme = {
         mobile: 550,
     },
     common: {
-        input:{
+        input: {
             borderColor: colorNames.WhiteSmoke
         },
         textArea: {
             borderColor: colorNames.LasMaras
+        },
+        button: {
+            default: {
+                background: colorNames.WhiteSmoke,
+                color: colorNames.LasMaras,
+                borderColor: colorNames.LasMaras
+            },
+            primary: {
+                background: colorNames.StickySap,
+                color: colorNames.White,
+                borderColor: colorNames.WhiteSmoke
+            },
+            danger: {
+                background: colorNames.TomatoFrog,
+                color: colorNames.White,
+                borderColor: colorNames.WhiteSmoke
+            }
         }
     },
     body: {
@@ -36,9 +54,9 @@ export const theme = {
             background: colorNames.StickySap,
             color: colorNames.White,
         },
-        recipeForm:{
+        recipeForm: {
             background: colorNames.White,
             color: colorNames.LasMaras,
         }
     }
-} 
+}

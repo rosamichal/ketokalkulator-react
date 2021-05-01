@@ -1,15 +1,19 @@
 import { IngredientsListItemWrapper, IngredientName } from './styles';
 import { Input } from '../../../common/Input';
-import IngredientMacroSummary from '../../../common/IngredientMacroSummary'
+import { Button } from '../../../common/Button';
+import {ReactComponent as MinusImg} from './minus.svg';
+import {ReactComponent as PlusImg} from './plus.svg';
+import {ReactComponent as TrashImg} from './trash.svg';
+import IngredientMacroSummary from '../../../common/IngredientMacroSummary';
 
 const IngredientsListItem = ({ ingredient }) => {
     return (
         <IngredientsListItemWrapper>
-            <button>-</button>
-            <Input type="number" value="100" />
-            <button>+</button>
-            <IngredientName class="ingredients-list__ingredient" data-ingredient-id="367">{ingredient.Name}</IngredientName>
-            <button>Usuń</button>
+            <Button square="37" primary><MinusImg /></Button>
+            <Input type="number" />
+            <Button square="37" primary><PlusImg /></Button>
+            <IngredientName data-ingredient-id="367">{ingredient.Name}</IngredientName>
+            <Button square="37" danger><TrashImg /></Button>
             <IngredientMacroSummary ingredient={ingredient} />
         </IngredientsListItemWrapper>
     )

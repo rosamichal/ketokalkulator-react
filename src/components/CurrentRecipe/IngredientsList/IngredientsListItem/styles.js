@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const IngredientsListItemWrapper = styled.li`
     display: grid;
     grid-template-columns: 35px 50px 35px 1fr 35px;
+    align-items: center;
     -moz-column-gap: 5px;
     column-gap: 5px;
     margin: 10px 0;
