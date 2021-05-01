@@ -3,7 +3,7 @@ import { ReactComponent as AvocadoImg } from './avocado.svg';
 
 export const HeaderWrapper = styled.div`
     background: ${({ theme }) => theme.header.darkGreen};
-    color: white;
+    color: ${({ theme }) => theme.header.color};
 `;
 
 export const Title = styled.div`

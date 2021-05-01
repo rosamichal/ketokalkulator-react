@@ -2,7 +2,8 @@ const colorNames = {
     LasMaras: "#4F525B",
     WhiteSmoke: "#F5F5F5",
     Crocodile: "#006E00",
-    StickySap: "#5EB000"
+    StickySap: "#5EB000",
+    White: "#FFFFFF"
 }
 
 export const theme = {
@@ -16,5 +17,10 @@ export const theme = {
     header: {
         darkGreen: colorNames.Crocodile,
         lightGreen: colorNames.StickySap,
+        color: colorNames.White
+    },
+    footer: {
+        background: colorNames.StickySap,
+        color: colorNames.White,
     }
 } 
