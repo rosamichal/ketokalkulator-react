@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { ReactComponent as AvocadoImg} from './avocado.svg';
+import { ReactComponent as AvocadoImg } from './avocado.svg';
 
 export const HeaderWrapper = styled.div`
     background: ${({ theme }) => theme.header.darkGreen};
@@ -7,7 +7,7 @@ export const HeaderWrapper = styled.div`
 `;
 
 export const Title = styled.div`
-    padding: 5px;
+    padding: 20px;
     background-image: linear-gradient(340deg, ${({ theme }) => theme.header.darkGreen} 0%, ${({ theme }) => theme.header.lightGreen} 100%);
     display: flex;
     justify-content: space-between;

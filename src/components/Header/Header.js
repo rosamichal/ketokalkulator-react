@@ -1,6 +1,6 @@
 import { HeaderWrapper, Title, Logo, Text } from './styles';
 
-export const Header = () => {
+const Header = () => {
     return (
         <HeaderWrapper>
             <Title>
@@ -11,4 +11,6 @@ export const Header = () => {
             </Title>
         </HeaderWrapper>
     )
-}
+};
+
+export default Header;
