@@ -10,6 +10,14 @@ export const theme = {
     breakpoints: {
         mobile: 550,
     },
+    common: {
+        input:{
+            borderColor: colorNames.WhiteSmoke
+        },
+        textArea: {
+            borderColor: colorNames.LasMaras
+        }
+    },
     body: {
         background: colorNames.WhiteSmoke,
         color: colorNames.LasMaras,
