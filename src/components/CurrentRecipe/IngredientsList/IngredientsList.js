@@ -31,8 +31,8 @@ const ingredients = [
 const IngredientsList = () => {
     return (
         <IngredientsListWrapper>
-            {ingredients.map(i => {
-                return <IngredientsListItem key={i.Id} ingredient={i} />
+            {ingredients.map(ingredient => {
+                return <IngredientsListItem key={ingredient.Id} ingredient={ingredient} />
             })}
         </IngredientsListWrapper>
     )

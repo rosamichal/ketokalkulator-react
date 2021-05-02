@@ -11,6 +11,10 @@ export const Button = styled.button`
     align-items: center;
     border-radius: 10px;
 
+    &:hover{
+        filter: brightness(115%);
+    }
+
     ${props => props.primary && css`
         background: ${({ theme }) => theme.common.button.primary.background};
         color: ${({ theme }) => theme.common.button.primary.color};
@@ -27,4 +31,9 @@ export const Button = styled.button`
         width: ${props.square}px;
         height: ${props.square}px;
     `}
+`;
+
+export const ButtonWrapper = styled.div`
+    display: flex;
+    justify-content: space-between;
 `;

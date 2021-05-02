@@ -1,6 +1,6 @@
-import { RecipeMacroSummary, Macro, MacroHeader, EnergyRatioWrapper, RecipeForm } from './styles'
+import { RecipeMacroSummary, Macro, MacroHeader, EnergyRatioWrapper, RecipeForm, ErrorLabel, HintLabel } from './styles'
 import { WideInput, TextArea } from '../common/Input'
-import { Button } from '../common/Button'
+import { Button, ButtonWrapper } from '../common/Button'
 import IngredientsList from './IngredientsList'
 
 const CurrentRecipe = () => {
@@ -30,20 +30,18 @@ const CurrentRecipe = () => {
             </RecipeMacroSummary>
             <RecipeForm>
                 <h2>Nazwa dania</h2>
-                <WideInput className="input input--wide js--recipe-name" type="text" placeholder="Wpisz nazwę dania"
-                    aria-label="Nazwa dania" />
-                <p className="recipe__name-error js--name-error"></p>
-                <h3 className="recipe__ingredients-list-empty-label js--ingredients-list-empty-label">Kliknij "Dodaj składnik", aby rozpocząć</h3>
+                <WideInput type="text" placeholder="Wpisz nazwę dania" aria-label="Nazwa dania" />
+                <ErrorLabel>Błąd. Nazwa jest wymagana.</ErrorLabel>
+                <HintLabel>Kliknij "Dodaj składnik", aby rozpocząć</HintLabel>
                 <IngredientsList />
                 <Button primary>Dodaj składnik</Button>
-                <span className="recipe__ingredients-error js--ingredients-error"></span>
-                <TextArea className="input input--recipe-note js--recipe-note" rows="5"
-                    placeholder="Miejsce na notatki (opcjonalne)"></TextArea>
-                <div>
+                <ErrorLabel as="span">Dodaj składnik</ErrorLabel>
+                <TextArea rows="5" placeholder="Miejsce na notatki (opcjonalne)"></TextArea>
+                <ButtonWrapper>
                     <Button danger>Wyczyść</Button>
                     <Button >Zainstaluj aplikację</Button>
                     <Button primary>Zapisz</Button>
-                </div>
+                </ButtonWrapper>
             </RecipeForm>
         </>
     )

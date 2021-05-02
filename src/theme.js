@@ -58,5 +58,12 @@ export const theme = {
             background: colorNames.White,
             color: colorNames.LasMaras,
         }
+    },
+    recipeList: {
+        recipeListItem: {
+            background: colorNames.White,
+            color: colorNames.LasMaras,
+            headerColor: colorNames.StickySap
+        }
     }
 }
