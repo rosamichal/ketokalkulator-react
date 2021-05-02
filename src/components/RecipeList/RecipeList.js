@@ -132,7 +132,9 @@ const RecipeList = () => {
         <RecipeListWrapper>
             <Search placeholder="Szukaj przepisu..." />
             <RecipeListContainer>
-                {recipes.map(recipe => <RecipeListItem key={recipe.name} recipe={recipe} />)}
+                {recipes.length ? 
+                recipes.map(recipe => <RecipeListItem key={recipe.name} recipe={recipe} />) : 
+                <p>Nie znaleziono...</p>}
             </RecipeListContainer>
         </RecipeListWrapper>
     )

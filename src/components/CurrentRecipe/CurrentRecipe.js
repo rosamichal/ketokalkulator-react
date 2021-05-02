@@ -1,9 +1,19 @@
-import { RecipeMacroSummary, Macro, MacroHeader, EnergyRatioWrapper, RecipeForm, ErrorLabel, HintLabel } from './styles'
-import { WideInput, TextArea } from '../common/Input'
-import { Button, ButtonWrapper } from '../common/Button'
-import IngredientsList from './IngredientsList'
+import {useState} from 'react';
+import { RecipeMacroSummary, Macro, MacroHeader, EnergyRatioWrapper, RecipeForm, ErrorLabel, HintLabel } from './styles';
+import { WideInput, TextArea } from '../common/Input';
+import { Button, ButtonWrapper } from '../common/Button';
+import Popup from '../common/Popup';
+import Search from '../common/Search';
+import IngredientsList from './IngredientsList';
 
 const CurrentRecipe = () => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const togglePopup = () => {
+        console.log(isOpen);
+        setIsOpen(!isOpen);
+    }
+
     return (
         <>
             <RecipeMacroSummary>
@@ -34,7 +44,7 @@ const CurrentRecipe = () => {
                 <ErrorLabel>Błąd. Nazwa jest wymagana.</ErrorLabel>
                 <HintLabel>Kliknij "Dodaj składnik", aby rozpocząć</HintLabel>
                 <IngredientsList />
-                <Button primary>Dodaj składnik</Button>
+                <Button primary onClick={togglePopup}>Dodaj składnik</Button>
                 <ErrorLabel as="span">Dodaj składnik</ErrorLabel>
                 <TextArea rows="5" placeholder="Miejsce na notatki (opcjonalne)"></TextArea>
                 <ButtonWrapper>
@@ -43,6 +53,10 @@ const CurrentRecipe = () => {
                     <Button primary>Zapisz</Button>
                 </ButtonWrapper>
             </RecipeForm>
+            {isOpen && <Popup title="Wybierz składnik" onClose={togglePopup}>
+                <Search />
+                Lista ze składnikami
+                </Popup>}
         </>
     )
 };

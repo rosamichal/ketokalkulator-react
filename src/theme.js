@@ -34,6 +34,9 @@ export const theme = {
                 color: colorNames.White,
                 borderColor: colorNames.WhiteSmoke
             }
+        },
+        popup:{
+            headerColor: colorNames.StickySap,
         }
     },
     body: {
