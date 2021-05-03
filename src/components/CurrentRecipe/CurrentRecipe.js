@@ -2,9 +2,35 @@ import {useState} from 'react';
 import { RecipeMacroSummary, Macro, MacroHeader, EnergyRatioWrapper, RecipeForm, ErrorLabel, HintLabel } from './styles';
 import { WideInput, TextArea } from '../common/Input';
 import { Button, ButtonWrapper } from '../common/Button';
-import Popup from '../common/Popup';
-import Search from '../common/Search';
+import IngredientsListPopup from '../common/Popup/IngredientsListPopup';
 import IngredientsList from './IngredientsList';
+
+const ingredients = [
+    {
+        Id: 446,
+        Name: "Majonez kielecki",
+        CategoryId: 0,
+        Protein: 1.9,
+        Fat: 68.0,
+        Carbohydrates: 2.3
+    },
+    {
+        Id: 447,
+        Name: "Masło Łaciate",
+        CategoryId: 0,
+        Protein: 0.6,
+        Fat: 83.0,
+        Carbohydrates: 0.8
+    },
+    {
+        Id: 474,
+        Name: "Parówki 100% z szynki Tarczyński naturalnie",
+        CategoryId: 0,
+        Protein: 14.0,
+        Fat: 27.0,
+        Carbohydrates: 0.5
+    }
+]
 
 const CurrentRecipe = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -43,7 +69,7 @@ const CurrentRecipe = () => {
                 <WideInput type="text" placeholder="Wpisz nazwę dania" aria-label="Nazwa dania" />
                 <ErrorLabel>Błąd. Nazwa jest wymagana.</ErrorLabel>
                 <HintLabel>Kliknij "Dodaj składnik", aby rozpocząć</HintLabel>
-                <IngredientsList />
+                <IngredientsList ingredients={ingredients} />
                 <Button primary onClick={togglePopup}>Dodaj składnik</Button>
                 <ErrorLabel as="span">Dodaj składnik</ErrorLabel>
                 <TextArea rows="5" placeholder="Miejsce na notatki (opcjonalne)"></TextArea>
@@ -53,10 +79,7 @@ const CurrentRecipe = () => {
                     <Button primary>Zapisz</Button>
                 </ButtonWrapper>
             </RecipeForm>
-            {isOpen && <Popup title="Wybierz składnik" onClose={togglePopup}>
-                <Search />
-                Lista ze składnikami
-                </Popup>}
+            {isOpen && <IngredientsListPopup togglePopup={togglePopup} ingredients={ingredients} />}
         </>
     )
 };

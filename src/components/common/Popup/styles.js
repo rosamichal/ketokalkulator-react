@@ -13,17 +13,19 @@ export const PopupWrapper = styled.div`
 `;
 
 export const PopupHeader = styled.h2`
-    /* margin: 0;
-    padding: 16px 0; */
     color: ${({ theme }) => theme.common.popup.headerColor};
+    background-color: ${({ theme }) => theme.common.popup.headerBackground};
     font-size: 22px;
     text-align: center;
+    margin: 0;
+    padding: 20px 10px;
 `;
 
 export const PopupContent = styled.div`
-    margin: 16px;
+    padding: 16px;
     flex: 1 0;
     overflow: auto;
+    background-color: ${({ theme }) => theme.common.popup.contentBackground}
 `;
 
 export const PopupButtons = styled.div`

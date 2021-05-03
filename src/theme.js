@@ -36,7 +36,14 @@ export const theme = {
             }
         },
         popup:{
-            headerColor: colorNames.StickySap,
+            headerColor: colorNames.White,
+            headerBackground: colorNames.StickySap,
+            contentBackground: colorNames.WhiteSmoke,
+            ingredientsListItem:{
+                background: colorNames.White,
+                color: colorNames.LasMaras,
+                headerColor: colorNames.StickySap
+            }
         }
     },
     body: {
