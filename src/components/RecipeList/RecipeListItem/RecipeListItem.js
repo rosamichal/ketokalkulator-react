@@ -2,9 +2,9 @@ import { RecipeListItemWrapper, RecipeListItemHeader } from './styles';
 import MacroSummary from '../../common/MacroSummary';
 import {Button, ButtonWrapper} from '../../common/Button';
 
-const RecipeListItem = ({ recipe }) => {
+const RecipeListItem = ({ recipe, onClick }) => {
     return (
-        <RecipeListItemWrapper>
+        <RecipeListItemWrapper onClick={onClick}>
             <RecipeListItemHeader>{recipe.name}</RecipeListItemHeader>
             <MacroSummary 
                 carbohydrates={recipe.carbohydrates} 

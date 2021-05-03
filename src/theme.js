@@ -34,6 +34,16 @@ export const theme = {
                 color: colorNames.White,
                 borderColor: colorNames.WhiteSmoke
             }
+        },
+        popup:{
+            headerColor: colorNames.White,
+            headerBackground: colorNames.StickySap,
+            contentBackground: colorNames.WhiteSmoke,
+            ingredientsListItem:{
+                background: colorNames.White,
+                color: colorNames.LasMaras,
+                headerColor: colorNames.StickySap
+            }
         }
     },
     body: {
