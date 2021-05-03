@@ -36,8 +36,7 @@ const CurrentRecipe = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const togglePopup = () => {
-        console.log(isOpen);
-        setIsOpen(!isOpen);
+        setIsOpen(isOpen => !isOpen);
     }
 
     return (
@@ -79,7 +78,7 @@ const CurrentRecipe = () => {
                     <Button primary>Zapisz</Button>
                 </ButtonWrapper>
             </RecipeForm>
-            {isOpen && <IngredientsListPopup togglePopup={togglePopup} ingredients={ingredients} />}
+            {isOpen && <IngredientsListPopup onClose={togglePopup} ingredients={ingredients} />}
         </>
     )
 };
