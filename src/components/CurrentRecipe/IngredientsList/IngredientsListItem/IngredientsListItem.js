@@ -1,9 +1,9 @@
 import { IngredientsListItemWrapper, IngredientName } from './styles';
 import { Input } from '../../../common/Input';
 import { Button } from '../../../common/Button';
-import {ReactComponent as MinusImg} from './minus.svg';
-import {ReactComponent as PlusImg} from './plus.svg';
-import {ReactComponent as TrashImg} from './trash.svg';
+import {ReactComponent as MinusImg} from '../../../../assets/images/minus.svg';
+import {ReactComponent as PlusImg} from '../../../../assets/images/plus.svg';
+import {ReactComponent as TrashImg} from '../../../../assets/images/trash.svg';
 import MacroSummary from '../../../common/MacroSummary';
 
 const IngredientsListItem = ({ ingredient }) => {

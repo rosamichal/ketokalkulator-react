@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { ReactComponent as AvocadoImg } from './avocado.svg';
+import { ReactComponent as AvocadoImg } from '../../assets/images/avocado.svg';
 
 export const HeaderWrapper = styled.div`
     background: ${({ theme }) => theme.header.darkGreen};
