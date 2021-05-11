@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import { RecipeMacroSummary, Macro, MacroHeader, EnergyRatioWrapper, RecipeForm, ErrorLabel, HintLabel } from './styles';
 import { WideInput, TextArea } from '../common/Input';
 import { Button, ButtonWrapper } from '../common/Button';
@@ -67,8 +67,9 @@ const CurrentRecipe = () => {
                 <h2>Nazwa dania</h2>
                 <WideInput type="text" placeholder="Wpisz nazwę dania" aria-label="Nazwa dania" />
                 <ErrorLabel>Błąd. Nazwa jest wymagana.</ErrorLabel>
-                <HintLabel>Kliknij "Dodaj składnik", aby rozpocząć</HintLabel>
-                <IngredientsList ingredients={ingredients} />
+                {ingredients.length ?
+                    <IngredientsList ingredients={ingredients} /> :
+                    <HintLabel>Kliknij "Dodaj składnik", aby rozpocząć</HintLabel>}
                 <Button primary onClick={togglePopup}>Dodaj składnik</Button>
                 <ErrorLabel as="span">Dodaj składnik</ErrorLabel>
                 <TextArea rows="5" placeholder="Miejsce na notatki (opcjonalne)"></TextArea>
