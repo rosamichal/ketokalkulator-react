@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { selectCurrentRecipe } from '../../redux/slice';
 import { RecipeMacroSummary, Macro, MacroHeader, EnergyRatioWrapper, RecipeForm, ErrorLabel, HintLabel } from './styles';
 import { WideInput, TextArea } from '../common/Input';
 import { Button, ButtonWrapper } from '../common/Button';
@@ -39,27 +41,29 @@ const CurrentRecipe = () => {
         setIsOpen(isOpen => !isOpen);
     }
 
+    const currentRecipe = useSelector(selectCurrentRecipe);
+
     return (
         <>
             <RecipeMacroSummary>
                 <Macro>
                     <MacroHeader>B</MacroHeader>
-                    <span>0.00</span>
+                    <span>{currentRecipe.protein}</span>
                 </Macro>
                 <Macro>
                     <MacroHeader>T</MacroHeader>
-                    <span>0.00</span>
+                    <span>{currentRecipe.fat}</span>
                 </Macro>
                 <Macro>
                     <MacroHeader>W</MacroHeader>
-                    <span>0.00</span>
+                    <span>{currentRecipe.carbohydrates}</span>
                 </Macro>
                 <EnergyRatioWrapper>
                     <div>
-                        Kcal: <span>0.00</span>
+                        Kcal: <span>{currentRecipe.energy}</span>
                     </div>
                     <div>
-                        Stosunek ketogenny <span>-- : 1</span>
+                        Stosunek ketogenny <span>{currentRecipe.ratio}</span>
                     </div>
                 </EnergyRatioWrapper>
             </RecipeMacroSummary>
@@ -67,8 +71,8 @@ const CurrentRecipe = () => {
                 <h2>Nazwa dania</h2>
                 <WideInput type="text" placeholder="Wpisz nazwę dania" aria-label="Nazwa dania" />
                 <ErrorLabel>Błąd. Nazwa jest wymagana.</ErrorLabel>
-                {ingredients.length ?
-                    <IngredientsList ingredients={ingredients} /> :
+                {currentRecipe.ingredients.length ?
+                    <IngredientsList ingredients={currentRecipe.ingredients} /> :
                     <HintLabel>Kliknij "Dodaj składnik", aby rozpocząć</HintLabel>}
                 <Button primary onClick={togglePopup}>Dodaj składnik</Button>
                 <ErrorLabel as="span">Dodaj składnik</ErrorLabel>
