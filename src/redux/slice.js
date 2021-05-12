@@ -20,12 +20,15 @@ const slice = createSlice({
     },
     reducers: {
         addRecipe: ({ recipeList }, { payload }) => {
-            recipeList.push(payload)
+            recipeList.push(payload);
+        },
+        changeCurrentRecipeName: ({currentRecipe}, {payload}) => {
+            currentRecipe.name = payload;
         }
     }
 });
 
-export const { addRecipe } = slice.actions;
+export const { addRecipe, changeCurrentRecipeName } = slice.actions;
 export const selectRecipeList = state => state.recipeList;
 export const selectCurrentRecipe = state => state.currentRecipe;
 export const selectIngredientList = state => state.ingredientsList;

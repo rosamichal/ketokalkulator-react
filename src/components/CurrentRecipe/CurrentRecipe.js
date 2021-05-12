@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { selectCurrentRecipe } from '../../redux/slice';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectCurrentRecipe, changeCurrentRecipeName } from '../../redux/slice';
 import { RecipeMacroSummary, Macro, MacroHeader, EnergyRatioWrapper, RecipeForm, ErrorLabel, HintLabel } from './styles';
 import { WideInput, TextArea } from '../common/Input';
 import { Button, ButtonWrapper } from '../common/Button';
@@ -42,6 +42,7 @@ const CurrentRecipe = () => {
     }
 
     const currentRecipe = useSelector(selectCurrentRecipe);
+    const dispatch = useDispatch();
 
     return (
         <>
@@ -69,7 +70,13 @@ const CurrentRecipe = () => {
             </RecipeMacroSummary>
             <RecipeForm>
                 <h2>Nazwa dania</h2>
-                <WideInput type="text" placeholder="Wpisz nazwę dania" aria-label="Nazwa dania" />
+                <WideInput
+                    type="text"
+                    placeholder="Wpisz nazwę dania"
+                    value={currentRecipe.name}
+                    onChange={e => dispatch(changeCurrentRecipeName(e.target.value))}
+                    aria-label="Nazwa dania"
+                />
                 <ErrorLabel>Błąd. Nazwa jest wymagana.</ErrorLabel>
                 {currentRecipe.ingredients.length ?
                     <IngredientsList ingredients={currentRecipe.ingredients} /> :
