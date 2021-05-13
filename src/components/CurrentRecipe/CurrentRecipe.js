@@ -1,6 +1,5 @@
-import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectCurrentRecipe, changeCurrentRecipeName } from '../../redux/slice';
+import { selectCurrentRecipe, selectIsIngredientsListPopupOpen, changeCurrentRecipeName, toggleIngredientsListPopup } from '../../redux/slice';
 import { RecipeMacroSummary, Macro, MacroHeader, EnergyRatioWrapper, RecipeForm, ErrorLabel, HintLabel } from './styles';
 import { WideInput, TextArea } from '../common/Input';
 import { Button, ButtonWrapper } from '../common/Button';
@@ -35,14 +34,13 @@ const ingredients = [
 ]
 
 const CurrentRecipe = () => {
-    const [isOpen, setIsOpen] = useState(false);
-
-    const togglePopup = () => {
-        setIsOpen(isOpen => !isOpen);
-    }
-
+    const isIngredientsListPopupOpen = useSelector(selectIsIngredientsListPopupOpen);
     const currentRecipe = useSelector(selectCurrentRecipe);
     const dispatch = useDispatch();
+
+    const togglePopup = () => {
+        dispatch(toggleIngredientsListPopup())
+    }
 
     return (
         <>
@@ -90,7 +88,7 @@ const CurrentRecipe = () => {
                     <Button primary>Zapisz</Button>
                 </ButtonWrapper>
             </RecipeForm>
-            {isOpen && <IngredientsListPopup onClose={togglePopup} ingredients={ingredients} />}
+            {isIngredientsListPopupOpen && <IngredientsListPopup onClose={togglePopup} ingredients={ingredients} />}
         </>
     )
 };
