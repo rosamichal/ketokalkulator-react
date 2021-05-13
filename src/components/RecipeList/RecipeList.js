@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { selectRecipeList } from '../../redux/slice';
+import { selectRecipes } from '../../redux/recipesSlice';
 import Search from '../common/Search';
 import RecipeListItem from './RecipeListItem';
 import { RecipeListWrapper, RecipeListContainer } from './styles';
@@ -16,15 +16,15 @@ const RecipeList = () => {
         setIsRecipeDetailsPopupOpen(isOpen => !isOpen);
     }
 
-    const recipes = useSelector(selectRecipeList);
+    const { recipeList } = useSelector(selectRecipes);
 
     return (
         <>
             <RecipeListWrapper>
                 <Search placeholder="Szukaj przepisu..." />
                 <RecipeListContainer>
-                    {recipes.length ?
-                        recipes.map(recipe => <RecipeListItem
+                    {recipeList.length ?
+                        recipeList.map(recipe => <RecipeListItem
                             key={recipe.name}
                             recipe={recipe}
                             onClick={toggleRecipeDetailsPopup} />) :
@@ -33,7 +33,7 @@ const RecipeList = () => {
             </RecipeListWrapper>
             {isRecipeDetailsPopupOpen && <RecipeDetailsPopup
                 onClose={toggleRecipeDetailsPopup}
-                recipe={recipes[1]}
+                recipe={recipeList[1]}
                 extraButton={<Button primary>Edytuj przepis</Button>} />}
         </>
     )

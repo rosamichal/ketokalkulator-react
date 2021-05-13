@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { selectCurrentRecipe, selectIsIngredientsListPopupOpen, changeCurrentRecipeName, toggleIngredientsListPopup } from '../../redux/slice';
+import { selectRecipes, changeCurrentRecipeName } from '../../redux/recipesSlice';
+import { selectIngredients, toggleIngredientsListPopup } from '../../redux/ingredientsSlice';
 import { RecipeMacroSummary, Macro, MacroHeader, EnergyRatioWrapper, RecipeForm, ErrorLabel, HintLabel } from './styles';
 import { WideInput, TextArea } from '../common/Input';
 import { Button, ButtonWrapper } from '../common/Button';
@@ -34,8 +35,8 @@ const ingredients = [
 ]
 
 const CurrentRecipe = () => {
-    const isIngredientsListPopupOpen = useSelector(selectIsIngredientsListPopupOpen);
-    const currentRecipe = useSelector(selectCurrentRecipe);
+    const { isIngredientsListPopupOpen } = useSelector(selectIngredients);
+    const { currentRecipe } = useSelector(selectRecipes);
     const dispatch = useDispatch();
 
     const togglePopup = () => {
