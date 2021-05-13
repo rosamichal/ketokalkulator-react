@@ -9,28 +9,28 @@ import IngredientsList from './IngredientsList';
 
 const ingredients = [
     {
-        Id: 446,
-        Name: "Majonez kielecki",
-        CategoryId: 0,
-        Protein: 1.9,
-        Fat: 68.0,
-        Carbohydrates: 2.3
+        id: 446,
+        name: "Majonez kielecki",
+        categoryId: 0,
+        protein: 1.9,
+        fat: 68.0,
+        carbohydrates: 2.3
     },
     {
-        Id: 447,
-        Name: "Masło Łaciate",
-        CategoryId: 0,
-        Protein: 0.6,
-        Fat: 83.0,
-        Carbohydrates: 0.8
+        id: 447,
+        name: "Masło Łaciate",
+        categoryId: 0,
+        protein: 0.6,
+        fat: 83.0,
+        carbohydrates: 0.8
     },
     {
-        Id: 474,
-        Name: "Parówki 100% z szynki Tarczyński naturalnie",
-        CategoryId: 0,
-        Protein: 14.0,
-        Fat: 27.0,
-        Carbohydrates: 0.5
+        id: 474,
+        name: "Parówki 100% z szynki Tarczyński naturalnie",
+        categoryId: 0,
+        protein: 14.0,
+        fat: 27.0,
+        carbohydrates: 0.5
     }
 ]
 

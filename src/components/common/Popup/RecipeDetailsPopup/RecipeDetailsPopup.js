@@ -14,7 +14,7 @@ const RecipeDetailsPopup = ({ onClose, recipe, extraButton }) => {
                 <h3>Składniki</h3>
                 <ul>
                     {recipe.ingredients.map(ingredient => {
-                        return <li key={ingredient.ingredient.Id}>{ingredient.weight} g {ingredient.ingredient.Name}</li>
+                        return <li key={ingredient.ingredient.id}>{ingredient.weight} g {ingredient.ingredient.name}</li>
                     })}
                 </ul>
             </div>

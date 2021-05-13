@@ -20,7 +20,7 @@ const IngredientsListPopup = ({ onClose, ingredients }) => {
                 {ingredients.length ?
                     ingredients.map(ingredient =>
                         <PopupIngredientsListItem
-                            key={ingredient.Id}
+                            key={ingredient.id}
                             ingredient={ingredient}
                             onClick={() => selectIngredient(ingredient)}
                         />) :
