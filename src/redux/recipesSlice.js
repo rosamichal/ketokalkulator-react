@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export const emptyRecipe = {
     name: '',
-    ingredients: [],
+    ingredientsList: [],
     note: '',
     protein: '0.00',
     fat: '0.00',
@@ -21,12 +21,15 @@ const slice = createSlice({
         changeCurrentRecipeName: ({ currentRecipe }, { payload }) => {
             currentRecipe.name = payload;
         },
+        addIngredientToCurrentRecipe: ({ currentRecipe }, { payload }) => {
+            currentRecipe.ingredientsList.push({ weight: 0, ingredient: payload });
+        },
         addRecipe: ({ recipeList }, { payload }) => {
             recipeList.push(payload);
         },
     }
 });
 
-export const { addRecipe, changeCurrentRecipeName } = slice.actions;
+export const { addRecipe, changeCurrentRecipeName, addIngredientToCurrentRecipe } = slice.actions;
 export const selectRecipes = state => state.recipes;
 export default slice.reducer;

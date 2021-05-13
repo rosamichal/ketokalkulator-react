@@ -77,8 +77,8 @@ const CurrentRecipe = () => {
                     aria-label="Nazwa dania"
                 />
                 <ErrorLabel>Błąd. Nazwa jest wymagana.</ErrorLabel>
-                {currentRecipe.ingredients.length ?
-                    <IngredientsList ingredients={currentRecipe.ingredients} /> :
+                {currentRecipe.ingredientsList.length ?
+                    <IngredientsList ingredientsList={currentRecipe.ingredientsList} /> :
                     <HintLabel>Kliknij "Dodaj składnik", aby rozpocząć</HintLabel>}
                 <Button primary onClick={togglePopup}>Dodaj składnik</Button>
                 <ErrorLabel as="span">Dodaj składnik</ErrorLabel>
