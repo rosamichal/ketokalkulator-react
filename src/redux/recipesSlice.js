@@ -24,12 +24,16 @@ const slice = createSlice({
         addIngredientToCurrentRecipe: ({ currentRecipe }, { payload }) => {
             currentRecipe.ingredientsList.push({ weight: 0, ingredient: payload });
         },
+        deleteIngredientFromCurrentRecipe: ({ currentRecipe }, { payload }) => {
+            var index = currentRecipe.ingredientsList.findIndex(ing =>ing.ingredient.id === payload);
+            currentRecipe.ingredientsList.splice(index, 1);
+        },
         addRecipe: ({ recipeList }, { payload }) => {
             recipeList.push(payload);
         },
     }
 });
 
-export const { addRecipe, changeCurrentRecipeName, addIngredientToCurrentRecipe } = slice.actions;
+export const { addRecipe, changeCurrentRecipeName, addIngredientToCurrentRecipe, deleteIngredientFromCurrentRecipe } = slice.actions;
 export const selectRecipes = state => state.recipes;
 export default slice.reducer;
