@@ -17,12 +17,23 @@ const IngredientsListItem = ({ ingredient }) => {
 
     return (
         <IngredientsListItemWrapper>
-            <Button square="37" primary><MinusImg /></Button>
+            <Button
+                square="37"
+                primary
+                onClick={() => dispatch(changeIngredientWeightInCurrentRecipe({ ingredientId: ingredient.ingredient.id, newWeight: ingredient.weight - 1 }))} >
+                <MinusImg />
+            </Button>
             <Input
                 type="number"
+                min="0"
                 value={ingredient.weight}
                 onChange={e => dispatch(changeIngredientWeightInCurrentRecipe({ ingredientId: ingredient.ingredient.id, newWeight: e.target.value }))} />
-            <Button square="37" primary><PlusImg /></Button>
+            <Button
+                square="37"
+                primary
+                onClick={() => dispatch(changeIngredientWeightInCurrentRecipe({ ingredientId: ingredient.ingredient.id, newWeight: ingredient.weight + 1 }))} >
+                <PlusImg />
+            </Button>
             <IngredientName onClick={() => dispatch(openIngredientsListPopup(ingredient.ingredient.id))}>
                 {ingredient.ingredient.name}
             </IngredientName>
@@ -37,7 +48,7 @@ const IngredientsListItem = ({ ingredient }) => {
                 fat={ingredient.ingredient.fat}
                 carbohydrates={ingredient.ingredient.carbohydrates}
             />
-        </IngredientsListItemWrapper>
+        </IngredientsListItemWrapper >
     )
 }
 

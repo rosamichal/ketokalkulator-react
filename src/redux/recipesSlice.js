@@ -34,7 +34,8 @@ const slice = createSlice({
         },
         changeIngredientWeightInCurrentRecipe: ({ currentRecipe }, { payload }) => {
             var index = currentRecipe.ingredientsList.findIndex(ing => ing.ingredient.id === payload.ingredientId);
-            currentRecipe.ingredientsList[index].weight = payload.newWeight;
+            const weight = payload.newWeight < 0 ? 0 : payload.newWeight;
+            currentRecipe.ingredientsList[index].weight = weight;
         },
         addRecipe: ({ recipeList }, { payload }) => {
             recipeList.push(payload);
