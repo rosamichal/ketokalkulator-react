@@ -4,15 +4,22 @@ const slice = createSlice({
     name: 'ingredients',
     initialState: {
         ingredientsList: [],
-        isIngredientsListPopupOpen: false,
+        ingredientsListPopup: {
+            isOpen: false,
+            oldIngredientId: 0
+        },
     },
     reducers: {
-        toggleIngredientsListPopup: state => {
-            state.isIngredientsListPopupOpen = !state.isIngredientsListPopupOpen;
+        openIngredientsListPopup: ({ ingredientsListPopup }, { payload }) => {
+            ingredientsListPopup.isOpen = true;
+            ingredientsListPopup.oldIngredientId = payload;
+        },
+        closeIngredientsListPopup: ({ ingredientsListPopup }) => {
+            ingredientsListPopup.isOpen = false;
         }
     }
 });
 
-export const { toggleIngredientsListPopup } = slice.actions;
+export const { openIngredientsListPopup, closeIngredientsListPopup } = slice.actions;
 export const selectIngredients = state => state.ingredients;
 export default slice.reducer;

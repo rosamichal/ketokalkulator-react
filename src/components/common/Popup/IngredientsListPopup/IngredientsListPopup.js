@@ -2,14 +2,43 @@ import Search from '../../Search';
 import Popup from '../Popup';
 import { PopupIngredientsList } from './styles';
 import PopupIngredientsListItem from './PopupIngredientsListItem';
-import { addIngredientToCurrentRecipe } from '../../../../redux/recipesSlice';
+import { addIngredientToCurrentRecipe, changeIngredientInCurrentRecipe } from '../../../../redux/recipesSlice';
 import { useDispatch } from 'react-redux';
 
-const IngredientsListPopup = ({ onClose, ingredients }) => {
+const ingredients = [
+    {
+        id: 446,
+        name: "Majonez kielecki",
+        categoryId: 0,
+        protein: 1.9,
+        fat: 68.0,
+        carbohydrates: 2.3
+    },
+    {
+        id: 447,
+        name: "Masło Łaciate",
+        categoryId: 0,
+        protein: 0.6,
+        fat: 83.0,
+        carbohydrates: 0.8
+    },
+    {
+        id: 474,
+        name: "Parówki 100% z szynki Tarczyński naturalnie",
+        categoryId: 0,
+        protein: 14.0,
+        fat: 27.0,
+        carbohydrates: 0.5
+    }
+]
+
+const IngredientsListPopup = ({ onClose, selectedIngredientId }) => {
     const dispatch = useDispatch();
 
     const selectIngredient = ingredient => {
-        dispatch(addIngredientToCurrentRecipe(ingredient));
+        selectedIngredientId ?
+            dispatch(changeIngredientInCurrentRecipe({ oldIngredientId: selectedIngredientId, ingredient })) :
+            dispatch(addIngredientToCurrentRecipe(ingredient));
         onClose();
     }
 

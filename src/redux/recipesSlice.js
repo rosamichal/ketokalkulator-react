@@ -25,8 +25,16 @@ const slice = createSlice({
             currentRecipe.ingredientsList.push({ weight: 0, ingredient: payload });
         },
         deleteIngredientFromCurrentRecipe: ({ currentRecipe }, { payload }) => {
-            var index = currentRecipe.ingredientsList.findIndex(ing =>ing.ingredient.id === payload);
+            var index = currentRecipe.ingredientsList.findIndex(ing => ing.ingredient.id === payload);
             currentRecipe.ingredientsList.splice(index, 1);
+        },
+        changeIngredientInCurrentRecipe: ({ currentRecipe }, { payload }) => {
+            var index = currentRecipe.ingredientsList.findIndex(ing => ing.ingredient.id === payload.oldIngredientId);
+            currentRecipe.ingredientsList[index].ingredient = payload.ingredient;
+        },
+        changeIngredientWeightInCurrentRecipe: ({ currentRecipe }, { payload }) => {
+            var index = currentRecipe.ingredientsList.findIndex(ing => ing.ingredient.id === payload.ingredientId);
+            currentRecipe.ingredientsList[index].weight = payload.newWeight;
         },
         addRecipe: ({ recipeList }, { payload }) => {
             recipeList.push(payload);
@@ -34,6 +42,13 @@ const slice = createSlice({
     }
 });
 
-export const { addRecipe, changeCurrentRecipeName, addIngredientToCurrentRecipe, deleteIngredientFromCurrentRecipe } = slice.actions;
+export const {
+    addRecipe,
+    changeCurrentRecipeName,
+    addIngredientToCurrentRecipe,
+    deleteIngredientFromCurrentRecipe,
+    changeIngredientWeightInCurrentRecipe,
+    changeIngredientInCurrentRecipe
+} = slice.actions;
 export const selectRecipes = state => state.recipes;
 export default slice.reducer;

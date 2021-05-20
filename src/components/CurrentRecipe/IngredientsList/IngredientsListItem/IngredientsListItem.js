@@ -6,7 +6,11 @@ import { ReactComponent as PlusImg } from '../../../../assets/images/plus.svg';
 import { ReactComponent as TrashImg } from '../../../../assets/images/trash.svg';
 import MacroSummary from '../../../common/MacroSummary';
 import { useDispatch } from 'react-redux';
-import { deleteIngredientFromCurrentRecipe } from '../../../../redux/recipesSlice';
+import { deleteIngredientFromCurrentRecipe, changeIngredientWeightInCurrentRecipe } from '../../../../redux/recipesSlice';
+
+//import { useSelector, useDispatch } from 'react-redux';
+//import { selectRecipes, changeCurrentRecipeName } from '../../../../..redux/recipesSlice';
+import { openIngredientsListPopup } from '../../../../redux/ingredientsSlice';
 
 const IngredientsListItem = ({ ingredient }) => {
     const dispatch = useDispatch();
@@ -14,9 +18,14 @@ const IngredientsListItem = ({ ingredient }) => {
     return (
         <IngredientsListItemWrapper>
             <Button square="37" primary><MinusImg /></Button>
-            <Input type="number" value={ingredient.weight} />
+            <Input
+                type="number"
+                value={ingredient.weight}
+                onChange={e => dispatch(changeIngredientWeightInCurrentRecipe({ ingredientId: ingredient.ingredient.id, newWeight: e.target.value }))} />
             <Button square="37" primary><PlusImg /></Button>
-            <IngredientName data-ingredient-id="367">{ingredient.ingredient.name}</IngredientName>
+            <IngredientName onClick={() => dispatch(openIngredientsListPopup(ingredient.ingredient.id))}>
+                {ingredient.ingredient.name}
+            </IngredientName>
             <Button
                 square="37"
                 danger

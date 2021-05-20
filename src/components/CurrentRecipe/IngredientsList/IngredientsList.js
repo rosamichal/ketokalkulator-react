@@ -1,6 +1,8 @@
 import IngredientsListItem from './IngredientsListItem';
 import { IngredientsListWrapper } from './styles'
 
+
+
 const IngredientsList = ({ ingredientsList }) => {
     return (
         <IngredientsListWrapper>
