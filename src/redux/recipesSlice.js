@@ -73,11 +73,15 @@ const slice = createSlice({
         addRecipe: ({ recipeList }, { payload }) => {
             recipeList.push(payload);
         },
+        resetCurrentRecipe: (state) => {
+            state.currentRecipe = emptyRecipe;
+        },
     }
 });
 
 export const {
     addRecipe,
+    resetCurrentRecipe,
     changeCurrentRecipeName,
     changeCurrentRecipeNote,
     addIngredientToCurrentRecipe,
