@@ -70,8 +70,27 @@ const slice = createSlice({
 
             updateRecipeMacro(currentRecipe);
         },
-        addRecipe: ({ recipeList }, { payload }) => {
-            recipeList.push(payload);
+        addOrEditRecipe: (state) => {
+            // if (!currentRecipe.name) {
+            //     recipeNameError.textContent = 'Nazwa dania jest wymagana';
+            //     return;
+            // }
+            // if (!+currentRecipe.energy) {
+            //     recipeIngredientsError.textContent = 'Dodaj przynajmniej 1 składnik';
+            //     return;
+            // }
+
+            // currentRecipe.ingredients = currentRecipe.ingredients.filter(ingredient => ingredient.weight > 0);
+
+            const recipeIndex = state.recipeList.findIndex(recipe => recipe.name === state.currentRecipe.name);
+            if (recipeIndex === -1) {
+                state.recipeList.push(state.currentRecipe);
+            } else {
+                state.recipeList[recipeIndex] = state.currentRecipe;
+            }
+
+            //localStorage.setItem('allRecipes', JSON.stringify(allRecipes));
+            state.currentRecipe = emptyRecipe;
         },
         resetCurrentRecipe: (state) => {
             state.currentRecipe = emptyRecipe;
@@ -80,7 +99,7 @@ const slice = createSlice({
 });
 
 export const {
-    addRecipe,
+    addOrEditRecipe,
     resetCurrentRecipe,
     changeCurrentRecipeName,
     changeCurrentRecipeNote,

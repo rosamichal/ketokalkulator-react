@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { selectRecipes, changeCurrentRecipeName, changeCurrentRecipeNote, resetCurrentRecipe } from '../../redux/recipesSlice';
+import { selectRecipes, changeCurrentRecipeName, changeCurrentRecipeNote, resetCurrentRecipe, addOrEditRecipe } from '../../redux/recipesSlice';
 import { selectIngredients, openIngredientsListPopup, closeIngredientsListPopup } from '../../redux/ingredientsSlice';
 import { RecipeMacroSummary, Macro, MacroHeader, EnergyRatioWrapper, RecipeForm, ErrorLabel, HintLabel } from './styles';
 import { WideInput, TextArea } from '../common/Input';
@@ -64,7 +64,7 @@ const CurrentRecipe = () => {
                 <ButtonWrapper>
                     <Button danger onClick={() => dispatch(resetCurrentRecipe())}> Wyczyść</Button>
                     <Button >Zainstaluj aplikację</Button>
-                    <Button primary>Zapisz</Button>
+                    <Button primary onClick={() => dispatch(addOrEditRecipe())}>Zapisz</Button>
                 </ButtonWrapper>
             </RecipeForm>
             {ingredientsListPopup.isOpen && <IngredientsListPopup
