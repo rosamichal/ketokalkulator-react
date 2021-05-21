@@ -31,7 +31,7 @@ const IngredientsListItem = ({ ingredient }) => {
             <Button
                 square="37"
                 primary
-                onClick={() => dispatch(changeIngredientWeightInCurrentRecipe({ ingredientId: ingredient.ingredient.id, newWeight: ingredient.weight + 1 }))} >
+                onClick={() => dispatch(changeIngredientWeightInCurrentRecipe({ ingredientId: ingredient.ingredient.id, newWeight: +ingredient.weight + 1 }))} >
                 <PlusImg />
             </Button>
             <IngredientName onClick={() => dispatch(openIngredientsListPopup(ingredient.ingredient.id))}>
