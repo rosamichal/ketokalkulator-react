@@ -40,6 +40,10 @@ const slice = createSlice({
     initialState: {
         currentRecipe: emptyRecipe,
         recipeList: [],
+        recipePopup: {
+            isOpen: false,
+            selectedRecipe: {}
+        },
     },
     reducers: {
         changeCurrentRecipeName: ({ currentRecipe }, { payload }) => {
@@ -92,21 +96,35 @@ const slice = createSlice({
             //localStorage.setItem('allRecipes', JSON.stringify(allRecipes));
             state.currentRecipe = emptyRecipe;
         },
+        deleteRecipe: ({ recipeList }, { payload }) => {
+            var index = recipeList.findIndex(recipe => recipe.name === payload);
+            recipeList.splice(index, 1);
+        },
         resetCurrentRecipe: (state) => {
             state.currentRecipe = emptyRecipe;
         },
+        openRecipePopup: ({ recipePopup }, { payload }) => {
+            recipePopup.isOpen = true;
+            recipePopup.selectedRecipe = payload;
+        },
+        closeRecipePopup: ({ recipePopup }) => {
+            recipePopup.isOpen = false;
+        }
     }
 });
 
 export const {
     addOrEditRecipe,
+    deleteRecipe,
     resetCurrentRecipe,
     changeCurrentRecipeName,
     changeCurrentRecipeNote,
     addIngredientToCurrentRecipe,
     deleteIngredientFromCurrentRecipe,
     changeIngredientWeightInCurrentRecipe,
-    changeIngredientInCurrentRecipe
+    changeIngredientInCurrentRecipe,
+    openRecipePopup,
+    closeRecipePopup
 } = slice.actions;
 export const selectRecipes = state => state.recipes;
 export default slice.reducer;
