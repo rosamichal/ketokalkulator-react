@@ -45,6 +45,9 @@ const slice = createSlice({
         changeCurrentRecipeName: ({ currentRecipe }, { payload }) => {
             currentRecipe.name = payload;
         },
+        changeCurrentRecipeNote: ({ currentRecipe }, { payload }) => {
+            currentRecipe.note = payload;
+        },
         addIngredientToCurrentRecipe: ({ currentRecipe }, { payload }) => {
             currentRecipe.ingredientsList.push({ weight: 0, ingredient: payload });
         },
@@ -76,6 +79,7 @@ const slice = createSlice({
 export const {
     addRecipe,
     changeCurrentRecipeName,
+    changeCurrentRecipeNote,
     addIngredientToCurrentRecipe,
     deleteIngredientFromCurrentRecipe,
     changeIngredientWeightInCurrentRecipe,

@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { selectRecipes, changeCurrentRecipeName } from '../../redux/recipesSlice';
+import { selectRecipes, changeCurrentRecipeName, changeCurrentRecipeNote } from '../../redux/recipesSlice';
 import { selectIngredients, openIngredientsListPopup, closeIngredientsListPopup } from '../../redux/ingredientsSlice';
 import { RecipeMacroSummary, Macro, MacroHeader, EnergyRatioWrapper, RecipeForm, ErrorLabel, HintLabel } from './styles';
 import { WideInput, TextArea } from '../common/Input';
@@ -55,7 +55,12 @@ const CurrentRecipe = () => {
                     <HintLabel>Kliknij "Dodaj składnik", aby rozpocząć</HintLabel>}
                 <Button primary onClick={() => dispatch(openIngredientsListPopup())}>Dodaj składnik</Button>
                 <ErrorLabel as="span">Dodaj składnik</ErrorLabel>
-                <TextArea rows="5" placeholder="Miejsce na notatki (opcjonalne)"></TextArea>
+                <TextArea
+                    value={currentRecipe.note}
+                    onChange={e => dispatch(changeCurrentRecipeNote(e.target.value))}
+                    rows="5"
+                    placeholder="Miejsce na notatki (opcjonalne)"
+                />
                 <ButtonWrapper>
                     <Button danger>Wyczyść</Button>
                     <Button >Zainstaluj aplikację</Button>
