@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { deleteRecipe } from '../../../redux/recipesSlice';
+import { deleteRecipe, selectRecipeToEdit } from '../../../redux/recipesSlice';
 import { RecipeListItemWrapper, RecipeListItemHeader } from './styles';
 import MacroSummary from '../../common/MacroSummary';
 import { Button, ButtonWrapper } from '../../common/Button';
@@ -7,9 +7,14 @@ import { Button, ButtonWrapper } from '../../common/Button';
 const RecipeListItem = ({ recipe, onClick }) => {
     const dispatch = useDispatch();
 
-    const onClickHandler = e => {
+    const deleteHandler = e => {
         e.stopPropagation();
         dispatch(deleteRecipe(recipe.name))
+    }
+
+    const selectToEditHandler = e => {
+        e.stopPropagation();
+        dispatch(selectRecipeToEdit(recipe))
     }
 
     return (
@@ -23,8 +28,8 @@ const RecipeListItem = ({ recipe, onClick }) => {
                 ratio={recipe.ratio}
             />
             <ButtonWrapper>
-                <Button danger onClick={e => onClickHandler(e)}>Usuń</Button>
-                <Button primary>Edytuj</Button>
+                <Button danger onClick={e => deleteHandler(e)}>Usuń</Button>
+                <Button primary onClick={e => selectToEditHandler(e)}>Edytuj</Button>
             </ButtonWrapper>
         </RecipeListItemWrapper>
     )

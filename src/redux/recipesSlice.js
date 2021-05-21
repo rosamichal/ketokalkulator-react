@@ -103,6 +103,12 @@ const slice = createSlice({
         resetCurrentRecipe: (state) => {
             state.currentRecipe = emptyRecipe;
         },
+        selectRecipeToEdit: (state, { payload }) => {
+            state.currentRecipe = payload;
+            if (state.recipePopup.isOpen) {
+                state.recipePopup.isOpen = false;
+            }
+        },
         openRecipePopup: ({ recipePopup }, { payload }) => {
             recipePopup.isOpen = true;
             recipePopup.selectedRecipe = payload;
@@ -117,6 +123,7 @@ export const {
     addOrEditRecipe,
     deleteRecipe,
     resetCurrentRecipe,
+    selectRecipeToEdit,
     changeCurrentRecipeName,
     changeCurrentRecipeNote,
     addIngredientToCurrentRecipe,

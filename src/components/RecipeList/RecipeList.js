@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { selectRecipes, openRecipePopup, closeRecipePopup } from '../../redux/recipesSlice';
+import { selectRecipes, openRecipePopup, closeRecipePopup, selectRecipeToEdit } from '../../redux/recipesSlice';
 import Search from '../common/Search';
 import RecipeListItem from './RecipeListItem';
 import { RecipeListWrapper, RecipeListContainer } from './styles';
@@ -28,7 +28,12 @@ const RecipeList = () => {
             {recipePopup.isOpen && <RecipeDetailsPopup
                 onClose={() => dispatch(closeRecipePopup())}
                 recipe={recipePopup.selectedRecipe}
-                extraButton={<Button primary>Edytuj przepis</Button>} />}
+                extraButton={
+                    <Button
+                        primary
+                        onClick={() => dispatch(selectRecipeToEdit(recipePopup.selectedRecipe))}>
+                        Edytuj przepis
+                    </Button>} />}
         </>
     )
 }
