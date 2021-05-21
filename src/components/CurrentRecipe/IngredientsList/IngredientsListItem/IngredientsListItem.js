@@ -44,9 +44,9 @@ const IngredientsListItem = ({ ingredient }) => {
                 <TrashImg />
             </Button>
             <MacroSummary
-                protein={ingredient.ingredient.protein}
-                fat={ingredient.ingredient.fat}
-                carbohydrates={ingredient.ingredient.carbohydrates}
+                protein={(ingredient.ingredient.protein * ingredient.weight / 100).toFixed(2)}
+                fat={(ingredient.ingredient.fat * ingredient.weight / 100).toFixed(2)}
+                carbohydrates={(ingredient.ingredient.carbohydrates * ingredient.weight / 100).toFixed(2)}
             />
         </IngredientsListItemWrapper >
     )
