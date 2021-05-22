@@ -57,19 +57,19 @@ const slice = createSlice({
             currentRecipe.ingredientsList.push({ weight: 0, ingredient: payload });
         },
         deleteIngredientFromCurrentRecipe: ({ currentRecipe }, { payload }) => {
-            var index = currentRecipe.ingredientsList.findIndex(ing => ing.ingredient.id === payload);
+            var index = currentRecipe.ingredientsList.findIndex(ing => ing.ingredient._id === payload);
             currentRecipe.ingredientsList.splice(index, 1);
 
             updateRecipeMacro(currentRecipe);
         },
         changeIngredientInCurrentRecipe: ({ currentRecipe }, { payload }) => {
-            var index = currentRecipe.ingredientsList.findIndex(ing => ing.ingredient.id === payload.oldIngredientId);
+            var index = currentRecipe.ingredientsList.findIndex(ing => ing.ingredient._id === payload.oldIngredientId);
             currentRecipe.ingredientsList[index].ingredient = payload.ingredient;
 
             updateRecipeMacro(currentRecipe);
         },
         changeIngredientWeightInCurrentRecipe: ({ currentRecipe }, { payload }) => {
-            var index = currentRecipe.ingredientsList.findIndex(ing => ing.ingredient.id === payload.ingredientId);
+            var index = currentRecipe.ingredientsList.findIndex(ing => ing.ingredient._id === payload.ingredientId);
             const weight = payload.newWeight < 0 ? 0 : payload.newWeight;
             currentRecipe.ingredientsList[index].weight = weight;
 

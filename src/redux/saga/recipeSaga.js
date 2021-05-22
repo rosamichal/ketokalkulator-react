@@ -7,7 +7,7 @@ function* saveRecipeListHandler() {
         const recipes = yield select(selectRecipes);
         yield call(writeData, persistKeys.RECIPE_LIST, recipes.recipeList);
     } catch (error) {
-        yield call(alert, "Nie udało się zapisać przepisów w bazie przeglądarki.")
+        yield call(console.error, `Something bad happened! ${error}`)
     }
 }
 

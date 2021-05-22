@@ -8,7 +8,7 @@ const IngredientsList = ({ ingredientsList }) => {
         <IngredientsListWrapper>
             {ingredientsList.map(ingredient => {
                 return <IngredientsListItem
-                    key={ingredient.ingredient.id}
+                    key={ingredient.ingredient._id}
                     ingredient={ingredient}
                 />
             })}

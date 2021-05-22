@@ -20,27 +20,27 @@ const IngredientsListItem = ({ ingredient }) => {
             <Button
                 square="37"
                 primary
-                onClick={() => dispatch(changeIngredientWeightInCurrentRecipe({ ingredientId: ingredient.ingredient.id, newWeight: ingredient.weight - 1 }))} >
+                onClick={() => dispatch(changeIngredientWeightInCurrentRecipe({ ingredientId: ingredient.ingredient._id, newWeight: ingredient.weight - 1 }))} >
                 <MinusImg />
             </Button>
             <Input
                 type="number"
                 min="0"
                 value={ingredient.weight}
-                onChange={e => dispatch(changeIngredientWeightInCurrentRecipe({ ingredientId: ingredient.ingredient.id, newWeight: e.target.value }))} />
+                onChange={e => dispatch(changeIngredientWeightInCurrentRecipe({ ingredientId: ingredient.ingredient._id, newWeight: e.target.value }))} />
             <Button
                 square="37"
                 primary
-                onClick={() => dispatch(changeIngredientWeightInCurrentRecipe({ ingredientId: ingredient.ingredient.id, newWeight: +ingredient.weight + 1 }))} >
+                onClick={() => dispatch(changeIngredientWeightInCurrentRecipe({ ingredientId: ingredient.ingredient._id, newWeight: +ingredient.weight + 1 }))} >
                 <PlusImg />
             </Button>
-            <IngredientName onClick={() => dispatch(openIngredientsListPopup(ingredient.ingredient.id))}>
+            <IngredientName onClick={() => dispatch(openIngredientsListPopup(ingredient.ingredient._id))}>
                 {ingredient.ingredient.name}
             </IngredientName>
             <Button
                 square="37"
                 danger
-                onClick={() => dispatch(deleteIngredientFromCurrentRecipe(ingredient.ingredient.id))} >
+                onClick={() => dispatch(deleteIngredientFromCurrentRecipe(ingredient.ingredient._id))} >
                 <TrashImg />
             </Button>
             <MacroSummary

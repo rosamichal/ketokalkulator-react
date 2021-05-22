@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { persistKeys, readData } from '../utils/persistenceUtils';
 
 const slice = createSlice({
     name: 'ingredients',
     initialState: {
-        ingredientsList: [],
+        ingredientsList: readData(persistKeys.INGREDIENT_LIST, []),
         ingredientsListPopup: {
             isOpen: false,
             oldIngredientId: 0
@@ -16,10 +17,14 @@ const slice = createSlice({
         },
         closeIngredientsListPopup: ({ ingredientsListPopup }) => {
             ingredientsListPopup.isOpen = false;
+        },
+        getIngredients: () => { },
+        setIngredients: (state, { payload }) => {
+            state.ingredientsList = payload;
         }
     }
 });
 
-export const { openIngredientsListPopup, closeIngredientsListPopup } = slice.actions;
+export const { openIngredientsListPopup, closeIngredientsListPopup, getIngredients, setIngredients } = slice.actions;
 export const selectIngredients = state => state.ingredients;
 export default slice.reducer;
