@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { roundNumberTo2DecimalPlaces } from '../utils/mathUtils';
+import { persistKeys, readData } from '../utils/persistenceUtils';
 
 export const emptyRecipe = {
     name: '',
@@ -39,7 +40,7 @@ const slice = createSlice({
     name: 'ketokalkulator',
     initialState: {
         currentRecipe: emptyRecipe,
-        recipeList: [],
+        recipeList: readData(persistKeys.RECIPE_LIST, []),
         recipePopup: {
             isOpen: false,
             selectedRecipe: {}
