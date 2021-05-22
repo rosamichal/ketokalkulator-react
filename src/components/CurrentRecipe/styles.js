@@ -29,12 +29,6 @@ export const RecipeForm = styled.div`
     padding: 10px;
 `;
 
-export const ErrorLabel = styled.p`
-    color: red;
-    font-size: 13px;
-    margin-top: 0;
-`;
-
 export const HintLabel = styled.h3`
     padding: 30px 10px;
     font-size: 15px;

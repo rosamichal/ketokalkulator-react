@@ -12,7 +12,7 @@ import { deleteIngredientFromCurrentRecipe, changeIngredientWeightInCurrentRecip
 //import { selectRecipes, changeCurrentRecipeName } from '../../../../..redux/recipesSlice';
 import { openIngredientsListPopup } from '../../../../redux/ingredientsSlice';
 
-const IngredientsListItem = ({ ingredient }) => {
+const IngredientsListItem = ({ ingredient, index }) => {
     const dispatch = useDispatch();
 
     return (
@@ -20,18 +20,18 @@ const IngredientsListItem = ({ ingredient }) => {
             <Button
                 square="37"
                 primary
-                onClick={() => dispatch(changeIngredientWeightInCurrentRecipe({ ingredientId: ingredient.ingredient._id, newWeight: ingredient.weight - 1 }))} >
+                onClick={() => dispatch(changeIngredientWeightInCurrentRecipe({ index: index, newWeight: ingredient.weight - 1 }))} >
                 <MinusImg />
             </Button>
             <Input
                 type="number"
                 min="0"
                 value={ingredient.weight}
-                onChange={e => dispatch(changeIngredientWeightInCurrentRecipe({ ingredientId: ingredient.ingredient._id, newWeight: e.target.value }))} />
+                onChange={e => dispatch(changeIngredientWeightInCurrentRecipe({ index: index, newWeight: e.target.value }))} />
             <Button
                 square="37"
                 primary
-                onClick={() => dispatch(changeIngredientWeightInCurrentRecipe({ ingredientId: ingredient.ingredient._id, newWeight: +ingredient.weight + 1 }))} >
+                onClick={() => dispatch(changeIngredientWeightInCurrentRecipe({ index: index, newWeight: +ingredient.weight + 1 }))} >
                 <PlusImg />
             </Button>
             <IngredientName onClick={() => dispatch(openIngredientsListPopup(ingredient.ingredient._id))}>

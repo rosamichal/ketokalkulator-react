@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { roundNumberTo2DecimalPlaces } from '../utils/mathUtils';
 import { persistKeys, readData } from '../utils/persistenceUtils';
+import toast from 'react-hot-toast';
 
 export const emptyRecipe = {
     name: '',
@@ -69,37 +70,41 @@ const slice = createSlice({
             updateRecipeMacro(currentRecipe);
         },
         changeIngredientWeightInCurrentRecipe: ({ currentRecipe }, { payload }) => {
-            var index = currentRecipe.ingredientsList.findIndex(ing => ing.ingredient._id === payload.ingredientId);
             const weight = payload.newWeight < 0 ? 0 : payload.newWeight;
-            currentRecipe.ingredientsList[index].weight = weight;
+            currentRecipe.ingredientsList[payload.index].weight = weight;
 
             updateRecipeMacro(currentRecipe);
         },
         addOrEditRecipe: (state) => {
-            // if (!currentRecipe.name) {
-            //     recipeNameError.textContent = 'Nazwa dania jest wymagana';
-            //     return;
-            // }
-            // if (!+currentRecipe.energy) {
-            //     recipeIngredientsError.textContent = 'Dodaj przynajmniej 1 składnik';
-            //     return;
-            // }
+            let isValid = true;
+            if (!state.currentRecipe.name) {
+                toast.error('Nazwa dania jest wymagana');
+                isValid = false;
+            }
 
-            // currentRecipe.ingredients = currentRecipe.ingredients.filter(ingredient => ingredient.weight > 0);
+            if (!+state.currentRecipe.ingredientsList.some(ingredient => ingredient.weight)) {
+                toast.error('Dodaj przynajmniej 1 składnik, którego waga jest większa od 0');
+                isValid = false;
+            }
+            if (!isValid) return;
+
+            state.currentRecipe.ingredientsList = state.currentRecipe.ingredientsList.filter(ingredient => ingredient.weight > 0);
 
             const recipeIndex = state.recipeList.findIndex(recipe => recipe.name === state.currentRecipe.name);
             if (recipeIndex === -1) {
                 state.recipeList.push(state.currentRecipe);
+                toast.success(`Pomyślnie dodano przepis '${state.currentRecipe.name}'`);
             } else {
                 state.recipeList[recipeIndex] = state.currentRecipe;
+                toast.success(`Pomyślnie zmodyfikowano przepis '${state.currentRecipe.name}'`);
             }
 
-            //localStorage.setItem('allRecipes', JSON.stringify(allRecipes));
             state.currentRecipe = emptyRecipe;
         },
         deleteRecipe: ({ recipeList }, { payload }) => {
             var index = recipeList.findIndex(recipe => recipe.name === payload);
             recipeList.splice(index, 1);
+            toast.success(`Usunięto przepis '${payload}'`);
         },
         resetCurrentRecipe: (state) => {
             state.currentRecipe = emptyRecipe;

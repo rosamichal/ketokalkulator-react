@@ -6,10 +6,11 @@ import { IngredientsListWrapper } from './styles'
 const IngredientsList = ({ ingredientsList }) => {
     return (
         <IngredientsListWrapper>
-            {ingredientsList.map(ingredient => {
+            {ingredientsList.map((ingredient, i) => {
                 return <IngredientsListItem
-                    key={ingredient.ingredient._id}
+                    key={`${ingredient.ingredient._id}_${i}`}
                     ingredient={ingredient}
+                    index={i}
                 />
             })}
         </IngredientsListWrapper>

@@ -10,6 +10,7 @@ import Footer from './components/Footer';
 import { AppContainer } from './components/AppContainer/indeks';
 import { useDispatch } from 'react-redux';
 import { getIngredients } from './redux/ingredientsSlice';
+import { Toaster } from 'react-hot-toast';
 
 const App = () => {
 
@@ -28,6 +29,26 @@ const App = () => {
         <CurrentRecipe />
         <RecipeList />
         <Footer />
+        <Toaster
+          position="bottom-center"
+          toastOptions={{
+            duration: 3000,
+            success: {
+              style: {
+                background: '#E7F2DA',
+                color: '#006E00',
+              },
+              iconTheme: {
+                primary: '#006E00',
+              },
+            },
+            error: {
+              style: {
+                background: '#FFEBE6',
+                color: '#E54D2B',
+              },
+            },
+          }} />
       </AppContainer>
     </ThemeProvider>
   );
