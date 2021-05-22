@@ -1,85 +1,76 @@
-import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectRecipes, changeCurrentRecipeName, changeCurrentRecipeNote, resetCurrentRecipe, addOrEditRecipe } from '../../redux/recipesSlice';
+import { selectIngredients, openIngredientsListPopup, closeIngredientsListPopup } from '../../redux/ingredientsSlice';
 import { RecipeMacroSummary, Macro, MacroHeader, EnergyRatioWrapper, RecipeForm, ErrorLabel, HintLabel } from './styles';
 import { WideInput, TextArea } from '../common/Input';
 import { Button, ButtonWrapper } from '../common/Button';
 import IngredientsListPopup from '../common/Popup/IngredientsListPopup';
 import IngredientsList from './IngredientsList';
 
-const ingredients = [
-    {
-        Id: 446,
-        Name: "Majonez kielecki",
-        CategoryId: 0,
-        Protein: 1.9,
-        Fat: 68.0,
-        Carbohydrates: 2.3
-    },
-    {
-        Id: 447,
-        Name: "Masło Łaciate",
-        CategoryId: 0,
-        Protein: 0.6,
-        Fat: 83.0,
-        Carbohydrates: 0.8
-    },
-    {
-        Id: 474,
-        Name: "Parówki 100% z szynki Tarczyński naturalnie",
-        CategoryId: 0,
-        Protein: 14.0,
-        Fat: 27.0,
-        Carbohydrates: 0.5
-    }
-]
-
 const CurrentRecipe = () => {
-    const [isOpen, setIsOpen] = useState(false);
+    const { ingredientsListPopup } = useSelector(selectIngredients);
+    const { currentRecipe } = useSelector(selectRecipes);
+    const dispatch = useDispatch();
 
-    const togglePopup = () => {
-        setIsOpen(isOpen => !isOpen);
-    }
+    // const togglePopup = () => {
+    //     dispatch(toggleIngredientsListPopup())
+    // }
 
     return (
         <>
             <RecipeMacroSummary>
                 <Macro>
                     <MacroHeader>B</MacroHeader>
-                    <span>0.00</span>
+                    <span>{currentRecipe.protein}</span>
                 </Macro>
                 <Macro>
                     <MacroHeader>T</MacroHeader>
-                    <span>0.00</span>
+                    <span>{currentRecipe.fat}</span>
                 </Macro>
                 <Macro>
                     <MacroHeader>W</MacroHeader>
-                    <span>0.00</span>
+                    <span>{currentRecipe.carbohydrates}</span>
                 </Macro>
                 <EnergyRatioWrapper>
                     <div>
-                        Kcal: <span>0.00</span>
+                        Kcal: <span>{currentRecipe.energy}</span>
                     </div>
                     <div>
-                        Stosunek ketogenny <span>-- : 1</span>
+                        Stosunek ketogenny <span>{currentRecipe.ratio}</span>
                     </div>
                 </EnergyRatioWrapper>
             </RecipeMacroSummary>
             <RecipeForm>
                 <h2>Nazwa dania</h2>
-                <WideInput type="text" placeholder="Wpisz nazwę dania" aria-label="Nazwa dania" />
+                <WideInput
+                    type="text"
+                    placeholder="Wpisz nazwę dania"
+                    value={currentRecipe.name}
+                    onChange={e => dispatch(changeCurrentRecipeName(e.target.value))}
+                    aria-label="Nazwa dania"
+                />
                 <ErrorLabel>Błąd. Nazwa jest wymagana.</ErrorLabel>
-                {ingredients.length ?
-                    <IngredientsList ingredients={ingredients} /> :
+                {currentRecipe.ingredientsList.length ?
+                    <IngredientsList ingredientsList={currentRecipe.ingredientsList} /> :
                     <HintLabel>Kliknij "Dodaj składnik", aby rozpocząć</HintLabel>}
-                <Button primary onClick={togglePopup}>Dodaj składnik</Button>
+                <Button primary onClick={() => dispatch(openIngredientsListPopup())}>Dodaj składnik</Button>
                 <ErrorLabel as="span">Dodaj składnik</ErrorLabel>
-                <TextArea rows="5" placeholder="Miejsce na notatki (opcjonalne)"></TextArea>
+                <TextArea
+                    value={currentRecipe.note}
+                    onChange={e => dispatch(changeCurrentRecipeNote(e.target.value))}
+                    rows="5"
+                    placeholder="Miejsce na notatki (opcjonalne)"
+                />
                 <ButtonWrapper>
-                    <Button danger>Wyczyść</Button>
+                    <Button danger onClick={() => dispatch(resetCurrentRecipe())}> Wyczyść</Button>
                     <Button >Zainstaluj aplikację</Button>
-                    <Button primary>Zapisz</Button>
+                    <Button primary onClick={() => dispatch(addOrEditRecipe())}>Zapisz</Button>
                 </ButtonWrapper>
             </RecipeForm>
-            {isOpen && <IngredientsListPopup onClose={togglePopup} ingredients={ingredients} />}
+            {ingredientsListPopup.isOpen && <IngredientsListPopup
+                onClose={() => dispatch(closeIngredientsListPopup())}
+                selectedIngredientId={ingredientsListPopup.oldIngredientId}
+            />}
         </>
     )
 };

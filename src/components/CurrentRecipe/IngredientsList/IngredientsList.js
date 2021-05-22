@@ -1,11 +1,16 @@
 import IngredientsListItem from './IngredientsListItem';
 import { IngredientsListWrapper } from './styles'
 
-const IngredientsList = ({ ingredients }) => {
+
+
+const IngredientsList = ({ ingredientsList }) => {
     return (
         <IngredientsListWrapper>
-            {ingredients.map(ingredient => {
-                return <IngredientsListItem key={ingredient.Id} ingredient={ingredient} />
+            {ingredientsList.map(ingredient => {
+                return <IngredientsListItem
+                    key={ingredient.ingredient._id}
+                    ingredient={ingredient}
+                />
             })}
         </IngredientsListWrapper>
     )
