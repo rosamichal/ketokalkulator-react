@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 import toast from 'react-hot-toast';
 import { roundNumberTo2DecimalPlaces } from '../utils/mathUtils';
 import { persistKeys, readData } from '../utils/persistenceUtils';
-import { scrollToTop } from '../utils/scrollUtils';
 
 export const emptyRecipe = {
     name: '',
@@ -76,6 +75,9 @@ const slice = createSlice({
 
             updateRecipeMacro(currentRecipe);
         },
+        resetCurrentRecipe: (state) => {
+            state.currentRecipe = emptyRecipe;
+        },
         addOrEditRecipe: (state, { payload }) => {
             let isValid = true;
 
@@ -112,12 +114,12 @@ const slice = createSlice({
             recipeList.splice(index, 1);
             toast.success(`Usunięto przepis '${payload}'`);
         },
-        resetCurrentRecipe: (state) => {
-            state.currentRecipe = emptyRecipe;
+        searchRecipe: (state, { payload }) => {
+            state.recipeList = readData(persistKeys.RECIPE_LIST, [])
+                .filter(recipe => recipe.name.toUpperCase().includes(payload.trim().toUpperCase()));
         },
         selectRecipeToEdit: (state, { payload }) => {
             state.currentRecipe = payload;
-            scrollToTop();
             if (state.recipePopup.isOpen) {
                 state.recipePopup.isOpen = false;
             }
@@ -144,7 +146,8 @@ export const {
     changeIngredientWeightInCurrentRecipe,
     changeIngredientInCurrentRecipe,
     openRecipePopup,
-    closeRecipePopup
+    closeRecipePopup,
+    searchRecipe
 } = slice.actions;
 export const selectRecipes = state => state.recipes;
 export default slice.reducer;

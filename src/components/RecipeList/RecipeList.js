@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { selectRecipes, openRecipePopup, closeRecipePopup, selectRecipeToEdit } from '../../redux/recipesSlice';
+import { selectRecipes, openRecipePopup, closeRecipePopup, selectRecipeToEdit, searchRecipe } from '../../redux/recipesSlice';
 import Search from '../common/Search';
 import RecipeListItem from './RecipeListItem';
 import { RecipeListWrapper, RecipeListContainer } from './styles';
@@ -15,7 +15,7 @@ const RecipeList = () => {
     return (
         <>
             <RecipeListWrapper>
-                <Search placeholder="Szukaj przepisu..." />
+                <Search placeholder="Szukaj przepisu..." onChange={e => dispatch(searchRecipe(e.target.value))} />
                 <RecipeListContainer>
                     {recipeList.length ?
                         recipeList.map(recipe => <RecipeListItem

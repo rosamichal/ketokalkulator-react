@@ -1,7 +1,7 @@
 import { takeEvery, select, call, delay } from 'redux-saga/effects';
-import { selectRecipes, addOrEditRecipe, deleteRecipe } from '../recipesSlice';
+import { selectRecipes, addOrEditRecipe, deleteRecipe, selectRecipeToEdit } from '../recipesSlice';
 import { persistKeys, writeData } from '../../utils/persistenceUtils';
-import { scrollToId } from '../../utils/scrollUtils';
+import { scrollToId, scrollToTop } from '../../utils/scrollUtils';
 
 function* saveRecipeListHandler() {
     try {
@@ -12,10 +12,14 @@ function* saveRecipeListHandler() {
     }
 }
 
-function* scrollToRecipeHandler({ payload }) {
+function* scrollToHandler({ payload }) {
     try {
-        yield delay(100);
-        yield call(scrollToId, payload);
+        yield delay(50);
+        if (payload) {
+            yield call(scrollToId, payload);
+        } else {
+            yield call(scrollToTop);
+        }
     } catch (error) {
         yield call(console.error, `Something bad happened! ${error}`)
     }
@@ -23,6 +27,7 @@ function* scrollToRecipeHandler({ payload }) {
 
 export function* recipeSaga() {
     yield takeEvery(addOrEditRecipe.type, saveRecipeListHandler);
-    yield takeEvery(addOrEditRecipe.type, scrollToRecipeHandler);
+    yield takeEvery(addOrEditRecipe.type, scrollToHandler);
     yield takeEvery(deleteRecipe.type, saveRecipeListHandler);
+    yield takeEvery(selectRecipeToEdit.type, scrollToHandler);
 }
