@@ -1,8 +1,8 @@
-import {WideInput} from '../Input';
+import { WideInput } from '../Input';
 
-const Search = ({placeholder}) => {
+const Search = ({ placeholder, onChange }) => {
     return (
-        <WideInput placeholder={placeholder ?? "Szukaj..."}/>
+        <WideInput placeholder={placeholder ?? "Szukaj..."} type='search' onChange={onChange} />
     )
 }
 

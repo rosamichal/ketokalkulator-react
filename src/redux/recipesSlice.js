@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
+import toast from 'react-hot-toast';
 import { roundNumberTo2DecimalPlaces } from '../utils/mathUtils';
 import { persistKeys, readData } from '../utils/persistenceUtils';
-import toast from 'react-hot-toast';
 
 export const emptyRecipe = {
     name: '',
@@ -75,9 +75,16 @@ const slice = createSlice({
 
             updateRecipeMacro(currentRecipe);
         },
-        addOrEditRecipe: (state) => {
+        resetCurrentRecipe: (state) => {
+            state.currentRecipe = emptyRecipe;
+        },
+        addOrEditRecipe: (state, { payload }) => {
             let isValid = true;
-            if (!state.currentRecipe.name) {
+
+            const name = payload.trim();
+            state.currentRecipe.name = name;
+
+            if (!name) {
                 toast.error('Nazwa dania jest wymagana');
                 isValid = false;
             }
@@ -90,13 +97,14 @@ const slice = createSlice({
 
             state.currentRecipe.ingredientsList = state.currentRecipe.ingredientsList.filter(ingredient => ingredient.weight > 0);
 
-            const recipeIndex = state.recipeList.findIndex(recipe => recipe.name === state.currentRecipe.name);
+            const recipeIndex = state.recipeList.findIndex(recipe => recipe.name === name);
             if (recipeIndex === -1) {
                 state.recipeList.push(state.currentRecipe);
-                toast.success(`Pomyślnie dodano przepis '${state.currentRecipe.name}'`);
+                state.recipeList.sort((a, b) => a.name.localeCompare(b.name));
+                toast.success(`Pomyślnie dodano przepis '${name}'`);
             } else {
                 state.recipeList[recipeIndex] = state.currentRecipe;
-                toast.success(`Pomyślnie zmodyfikowano przepis '${state.currentRecipe.name}'`);
+                toast.success(`Pomyślnie zmodyfikowano przepis '${name}'`);
             }
 
             state.currentRecipe = emptyRecipe;
@@ -106,8 +114,9 @@ const slice = createSlice({
             recipeList.splice(index, 1);
             toast.success(`Usunięto przepis '${payload}'`);
         },
-        resetCurrentRecipe: (state) => {
-            state.currentRecipe = emptyRecipe;
+        searchRecipe: (state, { payload }) => {
+            state.recipeList = readData(persistKeys.RECIPE_LIST, [])
+                .filter(recipe => recipe.name.toUpperCase().includes(payload.trim().toUpperCase()));
         },
         selectRecipeToEdit: (state, { payload }) => {
             state.currentRecipe = payload;
@@ -137,7 +146,8 @@ export const {
     changeIngredientWeightInCurrentRecipe,
     changeIngredientInCurrentRecipe,
     openRecipePopup,
-    closeRecipePopup
+    closeRecipePopup,
+    searchRecipe
 } = slice.actions;
 export const selectRecipes = state => state.recipes;
 export default slice.reducer;
