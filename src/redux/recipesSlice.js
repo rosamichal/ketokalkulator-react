@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
+import toast from 'react-hot-toast';
 import { roundNumberTo2DecimalPlaces } from '../utils/mathUtils';
 import { persistKeys, readData } from '../utils/persistenceUtils';
-import toast from 'react-hot-toast';
+import { nameComparer } from '../utils/sortUtils';
 
 export const emptyRecipe = {
     name: '',
@@ -93,6 +94,7 @@ const slice = createSlice({
             const recipeIndex = state.recipeList.findIndex(recipe => recipe.name === state.currentRecipe.name);
             if (recipeIndex === -1) {
                 state.recipeList.push(state.currentRecipe);
+                state.recipeList.sort(nameComparer);
                 toast.success(`Pomyślnie dodano przepis '${state.currentRecipe.name}'`);
             } else {
                 state.recipeList[recipeIndex] = state.currentRecipe;
