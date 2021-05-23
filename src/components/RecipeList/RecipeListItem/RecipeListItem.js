@@ -18,7 +18,7 @@ const RecipeListItem = ({ recipe, onClick }) => {
     }
 
     return (
-        <RecipeListItemWrapper onClick={onClick}>
+        <RecipeListItemWrapper onClick={onClick} id={recipe.name}>
             <RecipeListItemHeader>{recipe.name}</RecipeListItemHeader>
             <MacroSummary
                 carbohydrates={recipe.carbohydrates}

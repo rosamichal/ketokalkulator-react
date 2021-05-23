@@ -58,7 +58,7 @@ const CurrentRecipe = () => {
                 <ButtonWrapper>
                     <Button danger onClick={() => dispatch(resetCurrentRecipe())}> Wyczyść</Button>
                     <Button >Zainstaluj aplikację</Button>
-                    <Button primary onClick={() => dispatch(addOrEditRecipe())}>Zapisz</Button>
+                    <Button primary onClick={() => dispatch(addOrEditRecipe(currentRecipe.name))}>Zapisz</Button>
                 </ButtonWrapper>
             </RecipeForm>
             {ingredientsListPopup.isOpen && <IngredientsListPopup
