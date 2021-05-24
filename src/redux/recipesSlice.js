@@ -115,8 +115,12 @@ const slice = createSlice({
             toast.success(`Usunięto przepis '${payload}'`);
         },
         searchRecipe: (state, { payload }) => {
-            state.recipeList = readData(persistKeys.RECIPE_LIST, [])
-                .filter(recipe => recipe.name.toUpperCase().includes(payload.trim().toUpperCase()));
+            const query = payload.trim().toUpperCase();
+            const allRecipes = readData(persistKeys.RECIPE_LIST, []);
+            const recipesStartsWith = allRecipes.filter(recipe => recipe.name.toUpperCase().startsWith(query));
+            const recipesIncludes = allRecipes.filter(recipe => !recipe.name.toUpperCase().startsWith(query)
+                && recipe.name.toUpperCase().includes(query));
+            state.recipeList = [...recipesStartsWith, ...recipesIncludes];
         },
         selectRecipeToEdit: (state, { payload }) => {
             state.currentRecipe = payload;
