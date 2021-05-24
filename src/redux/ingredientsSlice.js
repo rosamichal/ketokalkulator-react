@@ -18,6 +18,10 @@ const slice = createSlice({
         closeIngredientsListPopup: ({ ingredientsListPopup }) => {
             ingredientsListPopup.isOpen = false;
         },
+        searchIngredient: (state, { payload }) => {
+            state.ingredientsList = readData(persistKeys.INGREDIENT_LIST, [])
+                .filter(ingredient => ingredient.name.toUpperCase().includes(payload.trim().toUpperCase()));
+        },
         getIngredients: () => { },
         setIngredients: (state, { payload }) => {
             state.ingredientsList = payload;
@@ -25,6 +29,6 @@ const slice = createSlice({
     }
 });
 
-export const { openIngredientsListPopup, closeIngredientsListPopup, getIngredients, setIngredients } = slice.actions;
+export const { openIngredientsListPopup, closeIngredientsListPopup, getIngredients, setIngredients, searchIngredient } = slice.actions;
 export const selectIngredients = state => state.ingredients;
 export default slice.reducer;

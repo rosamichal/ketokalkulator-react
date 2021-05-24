@@ -3,7 +3,7 @@ import Popup from '../Popup';
 import { PopupIngredientsList } from './styles';
 import PopupIngredientsListItem from './PopupIngredientsListItem';
 import { addIngredientToCurrentRecipe, changeIngredientInCurrentRecipe } from '../../../../redux/recipesSlice';
-import { selectIngredients } from '../../../../redux/ingredientsSlice';
+import { selectIngredients, searchIngredient } from '../../../../redux/ingredientsSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 const IngredientsListPopup = ({ onClose, selectedIngredientId }) => {
@@ -19,7 +19,7 @@ const IngredientsListPopup = ({ onClose, selectedIngredientId }) => {
 
     return (
         <Popup title="Wybierz składnik" onClose={onClose}>
-            <Search />
+            <Search onChange={e => dispatch(searchIngredient(e.target.value))} />
             <PopupIngredientsList>
                 {ingredientsList.length ?
                     ingredientsList.map(ingredient =>
