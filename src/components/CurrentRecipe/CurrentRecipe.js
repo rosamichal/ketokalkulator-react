@@ -6,6 +6,7 @@ import { WideInput, TextArea } from '../common/Input';
 import { Button, ButtonWrapper } from '../common/Button';
 import IngredientsListPopup from '../common/Popup/IngredientsListPopup';
 import IngredientsList from './IngredientsList';
+import Sticky from 'react-sticky-el';
 
 const CurrentRecipe = () => {
     const { ingredientsListPopup } = useSelector(selectIngredients);
@@ -14,28 +15,30 @@ const CurrentRecipe = () => {
 
     return (
         <>
-            <RecipeMacroSummary>
-                <Macro>
-                    <MacroHeader>B</MacroHeader>
-                    <span>{currentRecipe.protein}</span>
-                </Macro>
-                <Macro>
-                    <MacroHeader>T</MacroHeader>
-                    <span>{currentRecipe.fat}</span>
-                </Macro>
-                <Macro>
-                    <MacroHeader>W</MacroHeader>
-                    <span>{currentRecipe.carbohydrates}</span>
-                </Macro>
-                <EnergyRatioWrapper>
-                    <div>
-                        Kcal: <span>{currentRecipe.energy}</span>
-                    </div>
-                    <div>
-                        Stosunek ketogenny <span>{currentRecipe.ratio}</span>
-                    </div>
-                </EnergyRatioWrapper>
-            </RecipeMacroSummary>
+            <Sticky>
+                <RecipeMacroSummary>
+                    <Macro>
+                        <MacroHeader>B</MacroHeader>
+                        <span>{currentRecipe.protein}</span>
+                    </Macro>
+                    <Macro>
+                        <MacroHeader>T</MacroHeader>
+                        <span>{currentRecipe.fat}</span>
+                    </Macro>
+                    <Macro>
+                        <MacroHeader>W</MacroHeader>
+                        <span>{currentRecipe.carbohydrates}</span>
+                    </Macro>
+                    <EnergyRatioWrapper>
+                        <div>
+                            Kcal: <span>{currentRecipe.energy}</span>
+                        </div>
+                        <div>
+                            Stosunek ketogenny <span>{currentRecipe.ratio}</span>
+                        </div>
+                    </EnergyRatioWrapper>
+                </RecipeMacroSummary>
+            </Sticky>
             <RecipeForm>
                 <h2>Nazwa dania</h2>
                 <WideInput
