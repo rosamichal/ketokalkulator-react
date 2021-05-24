@@ -19,8 +19,12 @@ const slice = createSlice({
             ingredientsListPopup.isOpen = false;
         },
         searchIngredient: (state, { payload }) => {
-            state.ingredientsList = readData(persistKeys.INGREDIENT_LIST, [])
-                .filter(ingredient => ingredient.name.toUpperCase().includes(payload.trim().toUpperCase()));
+            const query = payload.trim().toUpperCase();
+            const allIngredients = readData(persistKeys.INGREDIENT_LIST, []);
+            const ingredientsStartsWith = allIngredients.filter(ingredient => ingredient.name.toUpperCase().startsWith(query));
+            const ingredientsIncludes = allIngredients.filter(ingredient => !ingredient.name.toUpperCase().startsWith(query)
+                && ingredient.name.toUpperCase().includes(query));
+            state.ingredientsList = [...ingredientsStartsWith, ...ingredientsIncludes];
         },
         getIngredients: () => { },
         setIngredients: (state, { payload }) => {
