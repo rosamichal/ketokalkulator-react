@@ -11,6 +11,7 @@ import { AppContainer } from './components/AppContainer/indeks';
 import { useDispatch } from 'react-redux';
 import { getIngredients } from './redux/ingredientsSlice';
 import { Toaster } from 'react-hot-toast';
+import ScrollTopArrow from './components/common/ScrollTopArrow';
 
 const App = () => {
 
@@ -29,6 +30,7 @@ const App = () => {
         <CurrentRecipe />
         <RecipeList />
         <Footer />
+        <ScrollTopArrow />
         <Toaster
           position="bottom-center"
           toastOptions={{
@@ -50,7 +52,7 @@ const App = () => {
             },
           }} />
       </AppContainer>
-    </ThemeProvider>
+    </ThemeProvider >
   );
 }
 
