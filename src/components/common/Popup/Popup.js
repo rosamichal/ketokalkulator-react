@@ -1,7 +1,10 @@
-import {PopupWrapper, PopupHeader, PopupContent, PopupButtons} from './styles';
-import {Button} from '../../common/Button';
+import { PopupWrapper, PopupHeader, PopupContent, PopupButtons } from './styles';
+import { Button } from '../../common/Button';
+import useLockBodyScroll from '../../../hooks/useLockBodyScroll';
 
 const Popup = ({ children, title, extraButton, onClose }) => {
+    useLockBodyScroll();
+
     return (
         <PopupWrapper>
             <PopupHeader>{title}</PopupHeader>
