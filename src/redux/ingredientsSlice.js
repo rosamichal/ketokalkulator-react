@@ -15,8 +15,9 @@ const slice = createSlice({
             ingredientsListPopup.isOpen = true;
             ingredientsListPopup.oldIngredientId = payload;
         },
-        closeIngredientsListPopup: ({ ingredientsListPopup }) => {
-            ingredientsListPopup.isOpen = false;
+        closeIngredientsListPopup: (state) => {
+            state.ingredientsListPopup.isOpen = false;
+            state.ingredientsList = readData(persistKeys.INGREDIENT_LIST, []);
         },
         searchIngredient: (state, { payload }) => {
             const query = payload.trim().toUpperCase();
