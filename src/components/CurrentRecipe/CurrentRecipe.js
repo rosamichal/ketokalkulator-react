@@ -7,11 +7,38 @@ import { Button, ButtonWrapper } from '../common/Button';
 import IngredientsListPopup from '../common/Popup/IngredientsListPopup';
 import IngredientsList from './IngredientsList';
 import Sticky from 'react-sticky-el';
+import { useEffect, useState } from 'react';
 
 const CurrentRecipe = () => {
     const { ingredientsListPopup } = useSelector(selectIngredients);
     const { currentRecipe } = useSelector(selectRecipes);
     const dispatch = useDispatch();
+
+    const [deferredPrompt, setDeferredPrompt] = useState(null);
+    useEffect(() => {
+        const beforeinstallpromptHandler = e => {
+            e.preventDefault();
+            setDeferredPrompt(e);
+        }
+
+        window.addEventListener('beforeinstallprompt', beforeinstallpromptHandler);
+
+        return () => window.removeEventListener('beforeinstallprompt', beforeinstallpromptHandler);
+    }, []);
+
+    const installPwaApp = () => {
+        setDeferredPrompt(null);
+        // Show the install prompt
+        deferredPrompt.prompt();
+        // Wait for the user to respond to the prompt
+        deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+                console.log('User accepted the install prompt');
+            } else {
+                console.log('User dismissed the install prompt');
+            }
+        });
+    }
 
     return (
         <>
@@ -60,7 +87,7 @@ const CurrentRecipe = () => {
                 />
                 <ButtonWrapper>
                     <Button danger onClick={() => dispatch(resetCurrentRecipe())}> Wyczyść</Button>
-                    <Button >Zainstaluj aplikację</Button>
+                    {deferredPrompt && <Button onClick={installPwaApp} >Zainstaluj aplikację</Button>}
                     <Button primary onClick={() => dispatch(addOrEditRecipe(currentRecipe.name))}>Zapisz</Button>
                 </ButtonWrapper>
             </RecipeForm>
