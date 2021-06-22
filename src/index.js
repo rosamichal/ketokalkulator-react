@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './redux/store';
+import { registerSW } from './serviceWorkerRegistration';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -13,6 +14,8 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+
+registerSW();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
