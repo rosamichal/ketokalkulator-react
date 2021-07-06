@@ -7,7 +7,7 @@ function* getIngredientHandler() {
     try {
         let ingredients = yield call(getIngredientsFromApi);
         ingredients = ingredients.sort((a, b) => a.name.localeCompare(b.name));
-        yield put(setIngredients(ingredients));
+        //yield put(setIngredients(ingredients));
         yield call(writeData, persistKeys.INGREDIENT_LIST, ingredients);
     } catch (error) {
         yield call(console.error, `Something bad happened! ${error}`)
