@@ -38,7 +38,7 @@ const getEnergy = (protein, fat, carbohydrates) => (protein + carbohydrates) * 4
 const getRatio = (protein, fat, carbohydrates) => fat / (protein + carbohydrates);
 
 const slice = createSlice({
-    name: 'ketokalkulator',
+    name: 'recipes',
     initialState: {
         currentRecipe: emptyRecipe,
         recipeList: readData(persistKeys.RECIPE_LIST, []),
@@ -46,6 +46,7 @@ const slice = createSlice({
             isOpen: false,
             selectedRecipe: {}
         },
+        searchRecipeText: ''
     },
     reducers: {
         changeCurrentRecipeName: ({ currentRecipe }, { payload }) => {
@@ -81,6 +82,9 @@ const slice = createSlice({
         addOrEditRecipe: (state, { payload }) => {
             let isValid = true;
 
+            var allRecipes = readData(persistKeys.RECIPE_LIST, []);
+            state.recipeList = allRecipes;
+
             const name = payload.trim();
             state.currentRecipe.name = name;
 
@@ -97,13 +101,14 @@ const slice = createSlice({
 
             state.currentRecipe.ingredientsList = state.currentRecipe.ingredientsList.filter(ingredient => ingredient.weight > 0);
 
-            const recipeIndex = state.recipeList.findIndex(recipe => recipe.name === name);
+            const recipeIndex = allRecipes.findIndex(recipe => recipe.name === name);
             if (recipeIndex === -1) {
-                state.recipeList.push(state.currentRecipe);
+                state.recipeList = [...allRecipes, state.currentRecipe];
                 state.recipeList.sort((a, b) => a.name.localeCompare(b.name));
                 toast.success(`Pomyślnie dodano przepis '${name}'`);
             } else {
-                state.recipeList[recipeIndex] = state.currentRecipe;
+                allRecipes[recipeIndex] = state.currentRecipe;
+                state.recipeList = allRecipes;
                 toast.success(`Pomyślnie zmodyfikowano przepis '${name}'`);
             }
 
@@ -115,6 +120,7 @@ const slice = createSlice({
             toast.success(`Usunięto przepis '${payload}'`);
         },
         searchRecipe: (state, { payload }) => {
+            state.searchRecipeText = payload;
             const query = payload.trim().toUpperCase();
             const allRecipes = readData(persistKeys.RECIPE_LIST, []);
             const recipesStartsWith = allRecipes.filter(recipe => recipe.name.toUpperCase().startsWith(query));
