@@ -20,9 +20,10 @@ const IngredientsListPopup = ({ onClose, selectedIngredientId }) => {
                 searchRef.current.blur();
             }
         };
-        searchRef.current?.parentElement.addEventListener('scroll', checkHideKeyboard);
+        const searchParent = searchRef.current.parentElement;
+        searchParent.addEventListener('scroll', checkHideKeyboard);
 
-        return () => searchRef.current?.parentElement.removeEventListener("scroll", checkHideKeyboard);
+        return () => searchParent.removeEventListener("scroll", checkHideKeyboard);
     }, []);
 
     const selectIngredient = ingredient => {
