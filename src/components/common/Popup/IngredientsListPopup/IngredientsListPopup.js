@@ -5,13 +5,25 @@ import PopupIngredientsListItem from './PopupIngredientsListItem';
 import { addIngredientToCurrentRecipe, changeIngredientInCurrentRecipe } from '../../../../redux/recipesSlice';
 import { selectIngredients, searchIngredient } from '../../../../redux/ingredientsSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const IngredientsListPopup = ({ onClose, selectedIngredientId }) => {
     const dispatch = useDispatch();
     const { ingredientsList } = useSelector(selectIngredients);
 
-    const [searchQuery, steSearchQuery] = useState('');
+    const [searchQuery, setSearchQuery] = useState('');
+    const searchRef = useRef();
+
+    useEffect(() => {
+        const checkHideKeyboard = () => {
+            if (searchRef.current.parentElement.scrollTop > 100) {
+                searchRef.current.blur();
+            }
+        };
+        searchRef.current?.parentElement.addEventListener('scroll', checkHideKeyboard);
+
+        return () => searchRef.current?.parentElement.removeEventListener("scroll", checkHideKeyboard);
+    }, []);
 
     const selectIngredient = ingredient => {
         selectedIngredientId ?
@@ -22,13 +34,13 @@ const IngredientsListPopup = ({ onClose, selectedIngredientId }) => {
 
     const onChangeHandler = (e) => {
         const query = e.target.value;
-        steSearchQuery(query);
+        setSearchQuery(query);
         dispatch(searchIngredient(query))
     }
 
     return (
         <Popup title="Wybierz składnik" onClose={onClose}>
-            <Search onChange={onChangeHandler} value={searchQuery} autoFocus={true} />
+            <Search onChange={onChangeHandler} value={searchQuery} autoFocus={true} ref={searchRef} />
             <PopupIngredientsList>
                 {ingredientsList.length ?
                     ingredientsList.map(ingredient =>
