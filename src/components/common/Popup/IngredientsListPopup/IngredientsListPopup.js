@@ -15,12 +15,13 @@ const IngredientsListPopup = ({ onClose, selectedIngredientId }) => {
     const searchRef = useRef();
 
     useEffect(() => {
+        const searchParent = searchRef.current.parentElement;
         const checkHideKeyboard = () => {
-            if (searchRef.current.parentElement.scrollTop > 100) {
+            if (searchParent.scrollTop > 100) {
                 searchRef.current.blur();
             }
         };
-        const searchParent = searchRef.current.parentElement;
+
         searchParent.addEventListener('scroll', checkHideKeyboard);
 
         return () => searchParent.removeEventListener("scroll", checkHideKeyboard);
