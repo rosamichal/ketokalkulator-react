@@ -1,5 +1,5 @@
-import { takeEvery, select, call, delay } from 'redux-saga/effects';
-import { selectRecipes, addOrEditRecipe, deleteRecipe, selectRecipeToEdit } from '../recipesSlice';
+import { takeEvery, select, call, delay, put } from 'redux-saga/effects';
+import { selectRecipes, addOrEditRecipe, deleteRecipe, selectRecipeToEdit, searchRecipe } from '../recipesSlice';
 import { persistKeys, writeData } from '../../utils/persistenceUtils';
 import { scrollToId, scrollToTop } from '../../utils/scrollUtils';
 
@@ -25,8 +25,13 @@ function* scrollToHandler({ payload }) {
     }
 }
 
+function* clearSearchRecipeHandler() {
+    yield put(searchRecipe(""));
+}
+
 export function* recipeSaga() {
     yield takeEvery(addOrEditRecipe.type, saveRecipeListHandler);
+    yield takeEvery(addOrEditRecipe.type, clearSearchRecipeHandler);
     yield takeEvery(addOrEditRecipe.type, scrollToHandler);
     yield takeEvery(deleteRecipe.type, saveRecipeListHandler);
     yield takeEvery(selectRecipeToEdit.type, scrollToHandler);

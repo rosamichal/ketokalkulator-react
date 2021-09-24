@@ -35,11 +35,11 @@ export const theme = {
                 borderColor: colorNames.WhiteSmoke
             }
         },
-        popup:{
+        popup: {
             headerColor: colorNames.White,
             headerBackground: colorNames.StickySap,
             contentBackground: colorNames.WhiteSmoke,
-            ingredientsListItem:{
+            ingredientsListItem: {
                 background: colorNames.White,
                 color: colorNames.LasMaras,
                 headerColor: colorNames.StickySap

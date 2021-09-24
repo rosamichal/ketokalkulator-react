@@ -4,7 +4,7 @@ import { persistKeys, readData } from '../utils/persistenceUtils';
 const slice = createSlice({
     name: 'ingredients',
     initialState: {
-        ingredientsList: readData(persistKeys.INGREDIENT_LIST, []),
+        ingredientsList: [], //readData(persistKeys.INGREDIENT_LIST, []),
         ingredientsListPopup: {
             isOpen: false,
             oldIngredientId: 0
@@ -17,15 +17,19 @@ const slice = createSlice({
         },
         closeIngredientsListPopup: (state) => {
             state.ingredientsListPopup.isOpen = false;
-            state.ingredientsList = readData(persistKeys.INGREDIENT_LIST, []);
+            state.ingredientsList = []; //readData(persistKeys.INGREDIENT_LIST, []);
         },
         searchIngredient: (state, { payload }) => {
             const query = payload.trim().toUpperCase();
-            const allIngredients = readData(persistKeys.INGREDIENT_LIST, []);
-            const ingredientsStartsWith = allIngredients.filter(ingredient => ingredient.name.toUpperCase().startsWith(query));
-            const ingredientsIncludes = allIngredients.filter(ingredient => !ingredient.name.toUpperCase().startsWith(query)
-                && ingredient.name.toUpperCase().includes(query));
-            state.ingredientsList = [...ingredientsStartsWith, ...ingredientsIncludes];
+            if (query) {
+                const allIngredients = readData(persistKeys.INGREDIENT_LIST, []);
+                const ingredientsStartsWith = allIngredients.filter(ingredient => ingredient.name.toUpperCase().startsWith(query));
+                const ingredientsIncludes = allIngredients.filter(ingredient => !ingredient.name.toUpperCase().startsWith(query)
+                    && ingredient.name.toUpperCase().includes(query));
+                state.ingredientsList = [...ingredientsStartsWith, ...ingredientsIncludes];
+            } else {
+                state.ingredientsList = [];
+            }
         },
         getIngredients: () => { },
         setIngredients: (state, { payload }) => {

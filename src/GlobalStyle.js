@@ -13,7 +13,7 @@ export const GlobalStyle = createGlobalStyle`
     body {
         background: ${({ theme }) => theme.body.background};
         color: ${({ theme }) => theme.body.color};
-        font-family: 'Lato', sans-serif;;
+        font-family: 'Lato', sans-serif;
         display: flex;
         justify-content: center;
         min-height: 100vh;
